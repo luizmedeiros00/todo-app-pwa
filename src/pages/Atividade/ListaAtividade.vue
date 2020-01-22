@@ -7,9 +7,13 @@
         :columns="columns"
         row-key="id"
       >
-       <template v-slot:item.datacadastro="{ item }">
-      <v-text >{{item.datacadastro | data}}</v-text>
-      </template>
+        <q-td
+          slot="body-cell-cliente"
+          slot-scope="item"
+          :props="item"
+        >
+         {{item.row.cliente.nome}}
+        </q-td>
 
         <q-td
           slot="body-cell-action"
@@ -45,6 +49,7 @@
 <script>
 import { QPage, QTable, QPageSticky } from 'quasar';
 import AtividadeService from '../../service/Atividade/AtividadeService';
+import DataFilter from '../../filter/data';
 
 export default {
   name: 'ListaAtividade',
@@ -56,7 +61,7 @@ export default {
       atividades: [],
       columns: [
         {
-          name: 'datacadastro', label: 'Data', field: 'datacadastro', align: 'left',
+          name: 'datacadastro', label: 'Data', field: 'datacadastro', align: 'left', format: val => DataFilter(val),
         },
         {
           name: 'descricao', label: 'Descrição', field: 'descricao', align: 'left',
@@ -71,7 +76,7 @@ export default {
           name: 'honorario', label: 'Honorario', field: 'honorario', align: 'left',
         },
         {
-          name: 'cliente_id', label: 'Cliente', field: 'cliente.nome', align: 'left',
+          name: 'cliente', label: 'Cliente', field: 'cliente', align: 'left',
         },
         {
           name: 'faturado', label: 'Faturado', field: 'faturado', align: 'left',
