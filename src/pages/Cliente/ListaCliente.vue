@@ -6,6 +6,9 @@
         :data="clientes"
         :columns="columns"
         row-key="id"
+        hide-bottom
+        :rows-per-page-options="[0]"
+        :pagination.sync="pagination"
       >
         <q-td
           slot="body-cell-action"
@@ -30,24 +33,34 @@
         :offset="[18, 18]"
       >
         <q-btn
+          @click="showModal = true"
           fab
           icon="add"
           color="accent"
         />
       </q-page-sticky>
     </q-page>
+    <modal-cadastro
+      :show="showModal"
+      @fechar="fecharModal"
+      @salvar="onSubmit($event)"
+    />
   </div>
 </template>
 <script>
 import { QPage, QTable, QPageSticky } from 'quasar';
 import ClienteService from '../../service/Cliente/ClienteService';
+import ModalCadastro from './ModalCadastro';
 
 export default {
   name: 'ListaCliente',
-  components: { QPage, QTable, QPageSticky },
+  components: {
+    QPage, QTable, QPageSticky, ModalCadastro,
+  },
   data() {
     return {
       ClienteService: new ClienteService(),
+      showModal: false,
       cliente: {},
       clientes: [],
       columns: [
@@ -61,16 +74,21 @@ export default {
           name: 'action', label: 'Ação', field: 'action', align: 'left',
         },
       ],
+      pagination: {
+        page: 1,
+        rowsPerPage: 0, // 0 means all rows
+      },
     };
   },
   methods: {
     edit(item) {
       this.cliente = { ...item };
     },
-    async onSubmit() {
-      await this.ClienteService.createOrUpdate(this.cliente);
+    async onSubmit(cliente) {
+      await this.ClienteService.createOrUpdate(cliente);
       this.load();
       this.onReset();
+      this.fecharModal();
     },
     async load() {
       const data = await this.ClienteService.list();
@@ -78,6 +96,9 @@ export default {
     },
     onReset() {
       this.cliente = {};
+    },
+    fecharModal() {
+      this.showModal = false;
     },
   },
   mounted() {
