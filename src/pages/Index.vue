@@ -1,38 +1,28 @@
 <template>
-  <q-page style="padding: 40px">
-    <div class="row">
-      <div class="col-xs-12 col-sm-6 col-md-4">
-        col
-      </div>
-      <div class="col-xs-12 col-sm-6 col-md-4">
-        col
-      </div>
-      <div class="col-xs-12 col-sm-6 col-md-4">
-        col
-      </div>
-    </div>
-    <q-card>
+  <q-page padding>
+    <!-- <q-card>
       <q-card-section>
-        <q-form
-          @submit="onSubmit"
-          @reset="onReset"
-          class="q-gutter-md"
-        >
-          <div class="col-12 col-md-12">
-
-            <q-input
-              outlined
-              v-model="cliente.nome"
-              label="Digite o nome"
-            />
+        <div class="text-h6">Cadastro de Cliente</div>
+      </q-card-section>
+      <q-card-section>
+        <q-form>
+          <input type="hidden" v-model="cliente.id"/>
+          <div class="q-col-gutter-md row">
+            <div class="col-xs-12 col-sm-6 col-md-6">
+              <q-input
+                outlined
+                v-model="cliente.nome"
+                label="Digite o nome"
+              />
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6">
+              <q-input
+                outlined
+                v-model="cliente.cpfcnpj"
+                label="Digite o Cpf ou CNPJ"
+              />
+            </div>
           </div>
-
-          <q-input
-            filled
-            type="number"
-            v-model="cliente.cpfcnpj"
-            label="Your age *"
-          />
         </q-form>
       </q-card-section>
       <q-card-actions>
@@ -43,50 +33,97 @@
             color="primary"
           />
           <q-btn
+            @click.prevent="onReset"
             label="Reset"
-            type="reset"
             color="primary"
-            flat
             class="q-ml-sm"
+            flat
           />
         </div>
       </q-card-actions>
-    </q-card>
+    </q-card> -->
 
+    <q-table
+      title="Lista de Clientes"
+      :data="clientes"
+      :columns="columns"
+      row-key="id"
+    >
+      <q-td
+        slot="body-cell-action"
+        slot-scope="props"
+        :props="props"
+      >
+        <q-btn
+          @click="edit(props.row)"
+          color="primary"
+          flat
+          icon="edit"
+        />
+        <q-btn
+          color="red"
+          flat
+          icon="delete"
+        />
+      </q-td>
+    </q-table>
+    <q-page-sticky position="bottom-right" :offset="[18, 18]">
+            <q-btn fab icon="add" color="accent" />
+          </q-page-sticky>
   </q-page>
 </template>
 
 <script>
 import {
-  QForm, QCard,
-  QCardSection,
-  QCardActions,
+  QPageSticky,
+  QTable,
 } from 'quasar';
 
-import axios from 'axios';
+import ClienteService from '../service/Cliente/ClienteService';
 
 export default {
   name: 'PageIndex',
   components: {
-    QForm,
-    QCard,
-    QCardSection,
-    QCardActions,
+    QPageSticky,
+    QTable,
   },
   data() {
     return {
+      ClienteService: new ClienteService(),
       cliente: {},
+      clientes: [],
+      columns: [
+        {
+          name: 'nome', label: 'Nome', field: 'nome', align: 'left',
+        },
+        {
+          name: 'cpfcnpj', label: 'CPF/CNPJ', field: 'cpfcnpj', align: 'left',
+        },
+        {
+          name: 'action', label: 'Ação', field: 'action', align: 'left',
+        },
+      ],
     };
   },
   methods: {
-    onSubmit() {
-      const url = 'http://192.168.1.224:8000/api/clientes';
-      axios.post(url, this.cliente).then(() => {
-      });
+    edit(item) {
+      this.cliente = { ...item };
+    },
+    async onSubmit() {
+      await this.ClienteService.createOrUpdate(this.cliente);
+      this.load();
+      this.onReset();
+    },
+    async load() {
+      const data = await this.ClienteService.list();
+      this.clientes = data;
     },
     onReset() {
-
+      this.cliente = {};
     },
+  },
+  mounted() {
+    this.load();
   },
 };
 </script>
