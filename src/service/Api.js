@@ -76,4 +76,14 @@ export default class API {
       throw ResponseService(error, 'create');
     }
   }
+
+
+  totalAtividades = async () => {
+    try {
+      const response = await http.get(`${this.api}/total`);
+      return response.data;
+    } catch (error) {
+      throw ResponseService(error, 'list');
+    }
+  }
 }

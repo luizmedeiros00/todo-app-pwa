@@ -1,24 +1,42 @@
 <template>
-  <div class="modal-cadastro-cliente">
-    <q-dialog :value="show" @input="fechar">
+  <div class="modal-cadastro-usuario">
+    <q-dialog
+      :value="show"
+      @input="fechar"
+    >
       <q-card style="width: 700px; max-width: 100vw;">
         <q-card-section>
-          <div class="text-h6">Cadastro Cliente</div>
+          <div class="text-h6">Cadastro Usuario</div>
         </q-card-section>
 
         <q-card-section class="q-pt-none">
           <q-form>
-            <input type="hidden" v-model="cliente.id" />
+            <input
+              type="hidden"
+              v-model="usuario.id"
+            />
             <div class="q-gutter-md">
               <q-input
                 outlined
-                v-model="cliente.nome"
+                v-model="usuario.name"
                 label="Nome"
               />
               <q-input
                 outlined
-                v-model="cliente.cpfcnpj"
-                label="CPF ou CNPJ"
+                v-model="usuario.email"
+                label="Email"
+              />
+              <q-input
+                v-model="usuario.password"
+                outlined
+                type="password"
+
+              />
+              <q-select
+                filled
+                v-model="usuario.tipo"
+                :options="tipo"
+                label="Tipo"
               />
             </div>
           </q-form>
@@ -28,7 +46,7 @@
           align="right"
           class="bg-white text-teal"
         >
-         <q-btn
+          <q-btn
             flat
             label="Fechar"
             @click="fechar"
@@ -49,19 +67,20 @@ import {
 } from 'quasar';
 
 export default {
-  name: 'ModalCadastroCliente',
+  name: 'ModalCadastroUsuario',
   components: {
     QDialog, QForm,
   },
   props: ['show', 'edit'],
   data() {
     return {
-      cliente: {},
+      tipo: ['Administrador', 'Coordenador', 'Usuario'],
+      usuario: {},
     };
   },
   methods: {
     salvar() {
-      this.$emit('salvar', this.cliente);
+      this.$emit('salvar', this.usuario);
     },
     fechar() {
       this.$emit('fechar');
@@ -69,7 +88,7 @@ export default {
   },
   watch: {
     edit(newEdit) {
-      this.cliente = { ...newEdit };
+      this.usuario = { ...newEdit };
     },
   },
 };

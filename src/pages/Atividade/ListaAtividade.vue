@@ -6,6 +6,9 @@
         :data="atividades"
         :columns="columns"
         row-key="id"
+         hide-bottom
+        :rows-per-page-options="[0]"
+        :pagination.sync="pagination"
       >
         <q-td
           slot="body-cell-cliente"
@@ -38,7 +41,6 @@
           >{{ item.row.faturado }}</q-badge>
         </q-td>
 
-
         I
         <q-td
           slot="body-cell-action"
@@ -52,13 +54,14 @@
             icon="edit"
           />
           <q-btn
+            @click="showModalDelete(props.row)"
             color="red"
             flat
             icon="delete"
           />
         </q-td>
       </q-table>
-       <q-page-sticky
+      <q-page-sticky
         position="bottom-right"
         :offset="[18, 18]"
       >
@@ -71,10 +74,16 @@
       </q-page-sticky>
     </q-page>
     <modal-cadastro
+      :edit="editarAtividade"
       :show="showModal"
-      :cli="clientes"
       @fechar="fecharModal"
       @salvar="onSubmit($event)"
+    />
+    <modal-delete
+      :dialog="showDeleteModal"
+      @fechar="showDeleteModal = false"
+      @deletar="deletar($event)"
+      :item="editarAtividade"
     />
   </div>
 </template>
@@ -83,21 +92,21 @@ import {
   QPage, QTable, QPageSticky,
 } from 'quasar';
 import AtividadeService from '../../service/Atividade/AtividadeService';
-import ClienteService from '../../service/Cliente/ClienteService';
-import DataFilter from '../../filter/data';
+import DinheiroFilter from '../../filter/dinheiro';
 import ModalCadastro from './ModalCadastro';
+import ModalDelete from '../../components/modal/ModalDelete';
 
 export default {
   name: 'ListaAtividade',
   components: {
-    QPage, QTable, QPageSticky, ModalCadastro,
+    QPage, QTable, QPageSticky, ModalCadastro, ModalDelete,
   },
   data() {
     return {
+      showDeleteModal: false,
       AtividadeService: new AtividadeService(),
-      ClienteService: new ClienteService(),
       showModal: false,
-      atividade: {},
+      editarAtividade: {},
       atividades: [],
       colors: {
         'Em andamento': () => 'amber',
@@ -107,7 +116,7 @@ export default {
       },
       columns: [
         {
-          name: 'datacadastro', label: 'Data', field: 'datacadastro', align: 'left', format: val => DataFilter(val),
+          name: 'datacadastro', label: 'Data', field: 'datacadastro', align: 'left',
         },
 
         {
@@ -120,10 +129,10 @@ export default {
           name: 'imposto', label: 'Imposto', field: 'imposto', align: 'left',
         },
         {
-          name: 'saving', label: 'Saving', field: 'saving', align: 'left',
+          name: 'saving', label: 'Saving', field: 'saving', align: 'left', format: val => DinheiroFilter(val),
         },
         {
-          name: 'honorario', label: 'Honorario', field: 'honorario', align: 'left',
+          name: 'honorario', label: 'Honorario', field: 'honorario', align: 'left', format: val => DinheiroFilter(val),
         },
         {
           name: 'cliente', label: 'Cliente', field: 'cliente', align: 'left',
@@ -135,41 +144,46 @@ export default {
           name: 'action', label: 'Ação', field: 'action', align: 'left',
         },
       ],
+      pagination: {
+        page: 1,
+        rowsPerPage: 0, // 0 means all rows
+      },
     };
   },
   methods: {
-
     getColorStatus(status) {
       return (this.colors[status] || this.colors.default)();
     },
-
     edit(item) {
-      this.atividade = { ...item };
+      this.editarAtividade = { ...item };
+      this.showModal = true;
     },
-    async onSubmit() {
-      await this.AtividadeService.createOrUpdate(this.atividade);
+    async onSubmit(atividade) {
+      await this.AtividadeService.createOrUpdate(atividade);
       this.load();
-      this.onReset();
       this.fecharModal();
     },
     async load() {
       const data = await this.AtividadeService.list();
+      console.log(data);
       this.atividades = data;
-    },
-    async loadClientes() {
-      const data = await this.ClienteService.list();
-      this.clientes = data.map(item => ({ label: item.nome, value: item.id }));
-    },
-    onReset() {
-      this.atividade = {};
     },
     fecharModal() {
       this.showModal = false;
+      this.editarAtividade = {};
+    },
+    showModalDelete(item) {
+      this.editarAtividade = item;
+      this.showDeleteModal = true;
+    },
+    async deletar(item) {
+      await this.AtividadeService.remove(item.id);
+      this.showDeleteModal = false;
+      this.load();
     },
   },
   mounted() {
     this.load();
-    this.loadClientes();
   },
 };
 </script>

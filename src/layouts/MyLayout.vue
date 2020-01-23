@@ -15,7 +15,7 @@
           Ramaral
         </q-toolbar-title>
 
-        <div>App v.1.20.0</div>
+        <div>v.1.20.0</div>
       </q-toolbar>
     </q-header>
 
@@ -27,6 +27,15 @@
     >
       <q-list>
         <q-item-label header>Menu</q-item-label>
+         <q-item to="dashboard">
+          <q-item-section avatar>
+            <q-icon name="code" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Dashboard</q-item-label>
+            <q-item-label caption>Graficos</q-item-label>
+          </q-item-section>
+        </q-item>
         <q-item to="cliente">
           <q-item-section avatar>
             <q-icon name="people" />
@@ -43,6 +52,15 @@
           <q-item-section>
             <q-item-label>Atividades</q-item-label>
             <q-item-label caption>Lista de atividades</q-item-label>
+          </q-item-section>
+        </q-item>
+         <q-item to="usuario">
+          <q-item-section avatar>
+            <q-icon name="people" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Usuarios</q-item-label>
+            <q-item-label caption>Usuarios do sistema</q-item-label>
           </q-item-section>
         </q-item>
 

@@ -1,9 +1,9 @@
 <template>
-  <div class="lista-cliente">
+  <div class="lista-usuario">
     <q-page padding>
       <q-table
-        title="Lista de Clientes"
-        :data="clientes"
+        title="Lista de Usuarios"
+        :data="usuarios"
         :columns="columns"
         row-key="id"
         hide-bottom
@@ -42,7 +42,7 @@
       </q-page-sticky>
     </q-page>
     <modal-cadastro
-      :edit="editarCliente"
+      :edit="editarUsuario"
       :show="showModal"
       @fechar="fecharModal"
       @salvar="onSubmit($event)"
@@ -51,7 +51,7 @@
       :dialog="showDeleteModal"
       @fechar="showDeleteModal = false"
       @deletar="deletar($event)"
-      :item="editarCliente"
+      :item="editarUsuario"
     />
   </div>
 </template>
@@ -59,28 +59,28 @@
 import {
   QPage, QTable, QPageSticky,
 } from 'quasar';
-import ClienteService from '../../service/Cliente/ClienteService';
+import UsuarioService from '../../service/Usuario/UsuarioService';
 import ModalCadastro from './ModalCadastro';
 import ModalDelete from '../../components/modal/ModalDelete';
 
 export default {
-  name: 'ListaCliente',
+  name: 'ListaUsuario',
   components: {
     QPage, QTable, QPageSticky, ModalCadastro, ModalDelete,
   },
   data() {
     return {
-      ClienteService: new ClienteService(),
+      UsuarioService: new UsuarioService(),
       showModal: false,
       showDeleteModal: false,
-      editarCliente: {},
-      clientes: [],
+      editarUsuario: {},
+      usuarios: [],
       columns: [
         {
-          name: 'nome', label: 'Nome', field: 'nome', align: 'left',
+          name: 'name', label: 'Nome', field: 'name', align: 'left',
         },
         {
-          name: 'cpfcnpj', label: 'CPF/CNPJ', field: 'cpfcnpj', align: 'left',
+          name: 'email', label: 'Email', field: 'email', align: 'left',
         },
         {
           name: 'action', label: 'Ação', field: 'action', align: 'left',
@@ -94,33 +94,34 @@ export default {
   },
   methods: {
     edit(item) {
-      this.editarCliente = { ...item };
+      this.editarUsuario = { ...item };
       this.showModal = true;
     },
-    async onSubmit(cliente) {
-      await this.ClienteService.createOrUpdate(cliente);
+    async onSubmit(usuario) {
+      await this.UsuarioService.createOrUpdate(usuario);
       this.load();
       this.onReset();
       this.fecharModal();
     },
     async load() {
-      const data = await this.ClienteService.list();
-      this.clientes = data;
+      const data = await this.UsuarioService.list();
+      console.log(data);
+      this.usuarios = data;
     },
     onReset() {
-      this.cliente = {};
+      this.usuario = {};
     },
     fecharModal() {
-      this.editarCliente = {};
+      this.editarUsuario = {};
       this.showModal = false;
     },
 
     showModalDelete(item) {
-      this.editarCliente = item;
+      this.editarUsuario = item;
       this.showDeleteModal = true;
     },
     async deletar(item) {
-      await this.ClienteService.remove(item.id);
+      await this.UsuarioService.remove(item.id);
       this.showDeleteModal = false;
       this.load();
     },
