@@ -37,7 +37,7 @@
           @click="showModal = true"
           fab
           icon="add"
-          color="accent"
+          color="primary"
         />
       </q-page-sticky>
     </q-page>

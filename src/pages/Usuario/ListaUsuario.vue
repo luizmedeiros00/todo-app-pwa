@@ -11,6 +11,17 @@
         :pagination.sync="pagination"
       >
         <q-td
+          slot="body-cell-tipo"
+          slot-scope="item"
+          :props="item"
+        >
+          <q-badge
+            :color="getColorTipo(item.row.tipo)"
+            dark
+          >{{ item.row.tipo }}</q-badge>
+        </q-td>
+
+        <q-td
           slot="body-cell-action"
           slot-scope="props"
           :props="props"
@@ -37,7 +48,7 @@
           @click="showModal = true"
           fab
           icon="add"
-          color="accent"
+          color="primary"
         />
       </q-page-sticky>
     </q-page>
@@ -75,12 +86,21 @@ export default {
       showDeleteModal: false,
       editarUsuario: {},
       usuarios: [],
+      colors: {
+        Administrador: () => 'primary',
+        Coordenador: () => 'amber',
+        Usuario: () => 'gray',
+        default: () => 'red',
+      },
       columns: [
         {
           name: 'name', label: 'Nome', field: 'name', align: 'left',
         },
         {
           name: 'email', label: 'Email', field: 'email', align: 'left',
+        },
+        {
+          name: 'tipo', label: 'Tipo', field: 'tipo', align: 'left',
         },
         {
           name: 'action', label: 'Ação', field: 'action', align: 'left',
@@ -93,6 +113,9 @@ export default {
     };
   },
   methods: {
+    getColorTipo(tipo) {
+      return (this.colors[tipo] || this.colors.default)();
+    },
     edit(item) {
       this.editarUsuario = { ...item };
       this.showModal = true;

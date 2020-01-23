@@ -11,6 +11,13 @@
         :pagination.sync="pagination"
       >
         <q-td
+          slot="body-cell-id"
+          slot-scope="item"
+          :props="item"
+        >
+            <q-icon name="event_note" size="1.5rem"  color="gray" />
+        </q-td>
+        <q-td
           slot="body-cell-cliente"
           slot-scope="item"
           :props="item"
@@ -69,7 +76,7 @@
           @click="showModal = true"
           fab
           icon="add"
-          color="accent"
+          color="primary"
         />
       </q-page-sticky>
     </q-page>
@@ -115,6 +122,9 @@ export default {
         default: () => 'green',
       },
       columns: [
+        {
+          name: 'id', label: '', field: 'id', align: 'left',
+        },
         {
           name: 'datacadastro', label: 'Data', field: 'datacadastro', align: 'left',
         },
