@@ -58,17 +58,24 @@
           />
         </q-td>
       </q-table>
-      <q-page-sticky
+       <q-page-sticky
         position="bottom-right"
         :offset="[18, 18]"
       >
         <q-btn
+          @click="showModal = true"
           fab
           icon="add"
           color="accent"
         />
       </q-page-sticky>
     </q-page>
+    <modal-cadastro
+      :show="showModal"
+      :cli="clientes"
+      @fechar="fecharModal"
+      @salvar="onSubmit($event)"
+    />
   </div>
 </template>
 <script>
@@ -76,14 +83,20 @@ import {
   QPage, QTable, QPageSticky,
 } from 'quasar';
 import AtividadeService from '../../service/Atividade/AtividadeService';
+import ClienteService from '../../service/Cliente/ClienteService';
 import DataFilter from '../../filter/data';
+import ModalCadastro from './ModalCadastro';
 
 export default {
   name: 'ListaAtividade',
-  components: { QPage, QTable, QPageSticky },
+  components: {
+    QPage, QTable, QPageSticky, ModalCadastro,
+  },
   data() {
     return {
       AtividadeService: new AtividadeService(),
+      ClienteService: new ClienteService(),
+      showModal: false,
       atividade: {},
       atividades: [],
       colors: {
@@ -137,17 +150,26 @@ export default {
       await this.AtividadeService.createOrUpdate(this.atividade);
       this.load();
       this.onReset();
+      this.fecharModal();
     },
     async load() {
       const data = await this.AtividadeService.list();
       this.atividades = data;
     },
+    async loadClientes() {
+      const data = await this.ClienteService.list();
+      this.clientes = data.map(item => ({ label: item.nome, value: item.id }));
+    },
     onReset() {
       this.atividade = {};
+    },
+    fecharModal() {
+      this.showModal = false;
     },
   },
   mounted() {
     this.load();
+    this.loadClientes();
   },
 };
 </script>
