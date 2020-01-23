@@ -1,7 +1,7 @@
 <template>
   <div class="modal-cadastro-cliente">
     <q-dialog :value="show" @input="fechar">
-      <q-card style="width: 700px; max-width: 80vw;">
+      <q-card style="width: 700px; max-width: 100vw;">
         <q-card-section>
           <div class="text-h6">Cadastro Cliente</div>
         </q-card-section>

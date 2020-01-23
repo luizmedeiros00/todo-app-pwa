@@ -12,9 +12,34 @@
           slot-scope="item"
           :props="item"
         >
-         {{item.row.cliente.nome}}
+          {{item.row.cliente.nome}}
         </q-td>
 
+        <q-td
+          slot="body-cell-status"
+          slot-scope="item"
+          :props="item"
+        >
+          <q-badge
+            :color="getColorStatus(item.row.status)"
+            dark
+          >{{ item.row.status }}</q-badge>
+        </q-td>
+        I
+
+        <q-td
+          slot="body-cell-faturado"
+          slot-scope="item"
+          :props="item"
+        >
+          <q-badge
+            :color="item.row.faturado === 'Sim' ? 'green' : 'red' "
+            dark
+          >{{ item.row.faturado }}</q-badge>
+        </q-td>
+
+
+        I
         <q-td
           slot="body-cell-action"
           slot-scope="props"
@@ -47,7 +72,9 @@
   </div>
 </template>
 <script>
-import { QPage, QTable, QPageSticky } from 'quasar';
+import {
+  QPage, QTable, QPageSticky,
+} from 'quasar';
 import AtividadeService from '../../service/Atividade/AtividadeService';
 import DataFilter from '../../filter/data';
 
@@ -59,12 +86,22 @@ export default {
       AtividadeService: new AtividadeService(),
       atividade: {},
       atividades: [],
+      colors: {
+        'Em andamento': () => 'amber',
+        'Não Iniciado': () => 'red',
+        Iniciado: () => 'primary',
+        default: () => 'green',
+      },
       columns: [
         {
           name: 'datacadastro', label: 'Data', field: 'datacadastro', align: 'left', format: val => DataFilter(val),
         },
+
         {
           name: 'descricao', label: 'Descrição', field: 'descricao', align: 'left',
+        },
+        {
+          name: 'status', label: 'Status', field: 'status', align: 'left',
         },
         {
           name: 'imposto', label: 'Imposto', field: 'imposto', align: 'left',
@@ -82,16 +119,17 @@ export default {
           name: 'faturado', label: 'Faturado', field: 'faturado', align: 'left',
         },
         {
-          name: 'status', label: 'Status', field: 'status', align: 'left',
-        },
-
-        {
           name: 'action', label: 'Ação', field: 'action', align: 'left',
         },
       ],
     };
   },
   methods: {
+
+    getColorStatus(status) {
+      return (this.colors[status] || this.colors.default)();
+    },
+
     edit(item) {
       this.atividade = { ...item };
     },
