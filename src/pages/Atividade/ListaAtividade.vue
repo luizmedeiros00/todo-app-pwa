@@ -7,19 +7,22 @@
         :columns="columns"
         row-key="id"
         hide-bottom
-        :rows-per-page-options="[0]"
+        :rows-per-page-options="[]"
         :pagination.sync="pagination"
         :loading="loading"
+
       >
       <template v-slot:loading>
         <q-inner-loading showing color="primary" />
       </template>
         <q-td
+
+
           slot="body-cell-descricao"
           slot-scope="item"
           :props="item"
         >
-          {{item.row.descricao.length > 20 ? `${item.row.descricao.substring(0,20)}...`
+          {{item.row.descricao.length > 100 ? `${item.row.descricao.substring(0,100)}...`
             : item.row.descricao}}
         </q-td>
 
@@ -169,7 +172,7 @@ export default {
       },
       columns: [
         {
-          name: 'id', label: '', field: 'id', align: 'left',
+          name: 'id', style: 'min-width: 15px; width: 15px', label: '', field: 'id', align: 'left',
         },
         {
           name: 'datacadastro', label: 'Data Inicio', field: 'datacadastro', align: 'center', format: val => DataFilter(val),
@@ -182,7 +185,7 @@ export default {
         },
 
         {
-          name: 'descricao', label: 'Descrição', field: 'descricao', align: 'center',
+          name: 'descricao', style: 'min-width: 150px; width: 150px', label: 'Descrição', field: 'descricao', align: 'left',
         },
         {
           name: 'status', label: 'Status', field: 'status', align: 'center',
