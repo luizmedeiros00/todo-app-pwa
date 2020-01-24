@@ -29,7 +29,7 @@
         <q-item-label header>Menu</q-item-label>
          <q-item to="dashboard">
           <q-item-section avatar>
-            <q-icon name="code" />
+            <q-icon name="poll" />
           </q-item-section>
           <q-item-section>
             <q-item-label>Dashboard</q-item-label>
@@ -47,7 +47,7 @@
         </q-item>
         <q-item to="atividade">
           <q-item-section avatar>
-            <q-icon name="code" />
+            <q-icon name="event_note" />
           </q-item-section>
           <q-item-section>
             <q-item-label>Atividades</q-item-label>
@@ -56,7 +56,7 @@
         </q-item>
          <q-item to="usuario">
           <q-item-section avatar>
-            <q-icon name="people" />
+            <q-icon name="account_box" />
           </q-item-section>
           <q-item-section>
             <q-item-label>Usuarios</q-item-label>

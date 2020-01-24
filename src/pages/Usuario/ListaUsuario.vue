@@ -9,7 +9,19 @@
         hide-bottom
         :rows-per-page-options="[0]"
         :pagination.sync="pagination"
+        :loading="loading"
       >
+        <q-td
+          slot="body-cell-id"
+          slot-scope="item"
+          :props="item"
+        >
+          <q-icon
+            name="person"
+            size="1.5rem"
+            color="gray"
+          />
+        </q-td>
         <q-td
           slot="body-cell-tipo"
           slot-scope="item"
@@ -40,6 +52,11 @@
           />
         </q-td>
       </q-table>
+      <paginacao
+            :last_page="lastPage"
+            :current_page="currentPage"
+            @input="load($event)"
+          />
       <q-page-sticky
         position="bottom-right"
         :offset="[18, 18]"
@@ -68,19 +85,23 @@
 </template>
 <script>
 import {
-  QPage, QTable, QPageSticky,
+  QPage, QTable, QPageSticky, QInnerLoading,
 } from 'quasar';
 import UsuarioService from '../../service/Usuario/UsuarioService';
 import ModalCadastro from './ModalCadastro';
 import ModalDelete from '../../components/modal/ModalDelete';
+import Paginacao from '../../components/table/Paginate';
 
 export default {
   name: 'ListaUsuario',
   components: {
-    QPage, QTable, QPageSticky, ModalCadastro, ModalDelete,
+    QPage, QTable, QPageSticky, ModalCadastro, ModalDelete, QInnerLoading, Paginacao,
   },
   data() {
     return {
+      loading: false,
+      currentPage: 0,
+      lastPage: 0,
       UsuarioService: new UsuarioService(),
       showModal: false,
       showDeleteModal: false,
@@ -94,6 +115,9 @@ export default {
       },
       columns: [
         {
+          name: 'id', label: '', field: 'id', align: 'center',
+        },
+        {
           name: 'name', label: 'Nome', field: 'name', align: 'left',
         },
         {
@@ -103,7 +127,7 @@ export default {
           name: 'tipo', label: 'Tipo', field: 'tipo', align: 'left',
         },
         {
-          name: 'action', label: 'Ação', field: 'action', align: 'left',
+          name: 'action', label: 'Ação', field: 'action', align: 'center',
         },
       ],
       pagination: {
@@ -126,10 +150,13 @@ export default {
       this.onReset();
       this.fecharModal();
     },
-    async load() {
-      const data = await this.UsuarioService.list();
-      console.log(data);
-      this.usuarios = data;
+    async load(page) {
+      this.loading = true;
+      const data = await this.UsuarioService.search({}, page);
+      this.loading = false;
+      this.lastPage = data.last_page;
+      this.currentPage = data.current_page;
+      this.usuarios = data.data;
     },
     onReset() {
       this.usuario = {};

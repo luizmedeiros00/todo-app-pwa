@@ -9,7 +9,19 @@
         hide-bottom
         :rows-per-page-options="[0]"
         :pagination.sync="pagination"
+        :loading="loading"
       >
+         <q-td
+          slot="body-cell-id"
+          slot-scope="item"
+          :props="item"
+        >
+          <q-icon
+            name="person"
+            size="1.5rem"
+            color="gray"
+          />
+        </q-td>
         <q-td
           slot="body-cell-action"
           slot-scope="props"
@@ -29,6 +41,11 @@
           />
         </q-td>
       </q-table>
+       <paginacao
+            :last_page="lastPage"
+            :current_page="currentPage"
+            @input="load($event)"
+          />
       <q-page-sticky
         position="bottom-right"
         :offset="[18, 18]"
@@ -57,19 +74,23 @@
 </template>
 <script>
 import {
-  QPage, QTable, QPageSticky,
+  QPage, QTable, QPageSticky, QInnerLoading,
 } from 'quasar';
 import ClienteService from '../../service/Cliente/ClienteService';
 import ModalCadastro from './ModalCadastro';
 import ModalDelete from '../../components/modal/ModalDelete';
+import Paginacao from '../../components/table/Paginate';
 
 export default {
   name: 'ListaCliente',
   components: {
-    QPage, QTable, QPageSticky, ModalCadastro, ModalDelete,
+    QPage, QTable, QPageSticky, ModalCadastro, ModalDelete, Paginacao, QInnerLoading,
   },
   data() {
     return {
+      loading: false,
+      currentPage: 0,
+      lastPage: 0,
       ClienteService: new ClienteService(),
       showModal: false,
       showDeleteModal: false,
@@ -77,13 +98,16 @@ export default {
       clientes: [],
       columns: [
         {
-          name: 'nome', label: 'Nome', field: 'nome', align: 'left',
+          name: 'id', label: '', field: 'id', align: 'center',
         },
         {
-          name: 'cpfcnpj', label: 'CPF/CNPJ', field: 'cpfcnpj', align: 'left',
+          name: 'nome', label: 'Nome', field: 'nome', align: 'center',
         },
         {
-          name: 'action', label: 'Ação', field: 'action', align: 'left',
+          name: 'cpfcnpj', label: 'CPF/CNPJ', field: 'cpfcnpj', align: 'center',
+        },
+        {
+          name: 'action', label: 'Ação', field: 'action', align: 'center',
         },
       ],
       pagination: {
@@ -103,9 +127,13 @@ export default {
       this.onReset();
       this.fecharModal();
     },
-    async load() {
-      const data = await this.ClienteService.list();
-      this.clientes = data;
+    async load(page) {
+      this.loading = true;
+      const data = await this.ClienteService.search({}, page);
+      this.loading = false;
+      this.lastPage = data.last_page;
+      this.currentPage = data.current_page;
+      this.clientes = data.data;
     },
     onReset() {
       this.cliente = {};

@@ -65,6 +65,17 @@ export default class API {
     }
   }
 
+  // search = async (params = {}, page) => {
+  //   const paginate = page ? page : 1
+  //   const filter = this.urlToParam(params)
+  //   let a = filter.toString().split(',').join('&');
+  //   try {
+  //     const response = await http.get(`${this.api}?page=${paginate}&${a}`)
+  //     return response.data
+  //   } catch (error) {
+  //     throw ResponseService(error, 'get', 'item')
+  //   }
+
   createOrUpdate = async ($data) => {
     const method = $data.id ? 'put' : 'post';
     const id = $data.id ? `/${$data.id}` : '';

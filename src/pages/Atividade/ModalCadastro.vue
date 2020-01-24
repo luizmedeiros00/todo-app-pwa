@@ -11,15 +11,15 @@
             <div class="q-gutter-md">
               <q-input
                 outlined
-                mask="##/##/####"
                 type="date"
+
                 fill-mask
                 v-model="atividade.datacadastro"
                 label="Data Inicio"
               />
               <q-input
                 outlined
-                mask="##/##/####"
+
                 type="date"
                 fill-mask
                 v-model="atividade.datafinalprevista"
@@ -27,7 +27,7 @@
               />
               <q-input
                 outlined
-                mask="##/##/####"
+
                 type="date"
                 fill-mask
                 v-model="atividade.datafinal"
@@ -114,11 +114,11 @@ export default {
     },
     async loadClientes() {
       const data = await this.ClienteService.list();
-      this.clientes = data.map(item => ({ label: item.nome, value: item.id }));
+      this.clientes = data.data.map(item => ({ label: item.nome, value: item.id }));
     },
     async loadUsers() {
       const data = await this.UserService.list();
-      this.users = data.map(item => ({ label: item.name, value: item.id }));
+      this.users = data.data.map(item => ({ label: item.name, value: item.id }));
     },
   },
   mounted() {

@@ -6,16 +6,33 @@
         :data="atividades"
         :columns="columns"
         row-key="id"
-         hide-bottom
+        hide-bottom
         :rows-per-page-options="[0]"
         :pagination.sync="pagination"
+        :loading="loading"
       >
+      <template v-slot:loading>
+        <q-inner-loading showing color="primary" />
+      </template>
+        <q-td
+          slot="body-cell-descricao"
+          slot-scope="item"
+          :props="item"
+        >
+          {{item.row.descricao.length > 20 ? `${item.row.descricao.substring(0,20)}...`
+            : item.row.descricao}}
+        </q-td>
+
         <q-td
           slot="body-cell-id"
           slot-scope="item"
           :props="item"
         >
-            <q-icon name="event_note" size="1.5rem"  color="gray" />
+          <q-icon
+            name="event_note"
+            size="1.5rem"
+            color="gray"
+          />
         </q-td>
         <q-td
           slot="body-cell-cliente"
@@ -66,7 +83,7 @@
             flat
             icon="delete"
           />
-           <q-btn
+          <q-btn
             @click="editDetalhe(props.row)"
             color="grey"
             flat
@@ -74,6 +91,13 @@
           />
         </q-td>
       </q-table>
+
+       <paginacao
+            :last_page="lastPage"
+            :current_page="currentPage"
+            @input="load($event)"
+          />
+
       <q-page-sticky
         position="bottom-right"
         :offset="[18, 18]"
@@ -92,7 +116,7 @@
       @fechar="fecharModal"
       @salvar="onSubmit($event)"
     />
-     <modal-detalhe
+    <modal-detalhe
       :edit="editarAtividade"
       :show="showModalDetalhe"
       @fechar="fecharModal"
@@ -105,24 +129,32 @@
       :item="editarAtividade"
     />
   </div>
+
+
 </template>
+
 <script>
 import {
-  QPage, QTable, QPageSticky,
+  QPage, QTable, QPageSticky, QInnerLoading,
 } from 'quasar';
 import AtividadeService from '../../service/Atividade/AtividadeService';
 import DinheiroFilter from '../../filter/dinheiro';
+import DataFilter from '../../filter/data';
 import ModalCadastro from './ModalCadastro';
 import ModalDetalhe from './Detalhes';
 import ModalDelete from '../../components/modal/ModalDelete';
+import Paginacao from '../../components/table/Paginate';
 
 export default {
   name: 'ListaAtividade',
   components: {
-    QPage, QTable, QPageSticky, ModalCadastro, ModalDelete, ModalDetalhe,
+    QPage, QTable, QPageSticky, ModalCadastro, ModalDelete, ModalDetalhe, Paginacao, QInnerLoading,
   },
   data() {
     return {
+      loading: false,
+      currentPage: 0,
+      lastPage: 0,
       showDeleteModal: false,
       AtividadeService: new AtividadeService(),
       showModal: false,
@@ -140,32 +172,38 @@ export default {
           name: 'id', label: '', field: 'id', align: 'left',
         },
         {
-          name: 'datacadastro', label: 'Data', field: 'datacadastro', align: 'left',
+          name: 'datacadastro', label: 'Data Inicio', field: 'datacadastro', align: 'center', format: val => DataFilter(val),
+        },
+        {
+          name: 'datafinalprevista', label: 'Data Final Prevista', field: 'datafinalprevista', align: 'center', format: val => DataFilter(val),
+        },
+        {
+          name: 'datafinal', label: 'Data Final', field: 'datafinal', align: 'center', format: val => DataFilter(val),
         },
 
         {
-          name: 'descricao', label: 'Descrição', field: 'descricao', align: 'left',
+          name: 'descricao', label: 'Descrição', field: 'descricao', align: 'center',
         },
         {
-          name: 'status', label: 'Status', field: 'status', align: 'left',
+          name: 'status', label: 'Status', field: 'status', align: 'center',
         },
         {
-          name: 'imposto', label: 'Imposto', field: 'imposto', align: 'left',
+          name: 'imposto', label: 'Imposto', field: 'imposto', align: 'center',
         },
         {
-          name: 'saving', label: 'Saving', field: 'saving', align: 'left', format: val => DinheiroFilter(val),
+          name: 'saving', label: 'Saving', field: 'saving', align: 'center', format: val => DinheiroFilter(val),
         },
         {
-          name: 'honorario', label: 'Honorario', field: 'honorario', align: 'left', format: val => DinheiroFilter(val),
+          name: 'honorario', label: 'Honorario', field: 'honorario', align: 'center', format: val => DinheiroFilter(val),
         },
         {
-          name: 'cliente', label: 'Cliente', field: 'cliente', align: 'left',
+          name: 'cliente', label: 'Cliente', field: 'cliente', align: 'center',
         },
         {
-          name: 'faturado', label: 'Faturado', field: 'faturado', align: 'left',
+          name: 'faturado', label: 'Faturado', field: 'faturado', align: 'center',
         },
         {
-          name: 'action', label: 'Ação', field: 'action', align: 'left',
+          name: 'action', label: 'Ação', field: 'action', align: 'center',
         },
       ],
       pagination: {
@@ -191,10 +229,14 @@ export default {
       this.load();
       this.fecharModal();
     },
-    async load() {
-      const data = await this.AtividadeService.list();
-      console.log(data);
-      this.atividades = data;
+
+    async load(page) {
+      this.loading = true;
+      const data = await this.AtividadeService.search({}, page);
+      this.loading = false;
+      this.lastPage = data.last_page;
+      this.currentPage = data.current_page;
+      this.atividades = data.data;
     },
     fecharModal() {
       this.showModal = false;

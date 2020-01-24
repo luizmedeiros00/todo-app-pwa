@@ -9,7 +9,7 @@
       <q-card>
         <q-card-section class="row items-center">
           <q-avatar
-            icon="signal_wifi_off"
+            icon="warning"
             color="primary"
             text-color="white"
           />
