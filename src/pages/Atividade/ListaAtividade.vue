@@ -66,6 +66,12 @@
             flat
             icon="delete"
           />
+           <q-btn
+            @click="editDetalhe(props.row)"
+            color="gray"
+            flat
+            icon="remove_red_eye"
+          />
         </q-td>
       </q-table>
       <q-page-sticky
@@ -86,6 +92,12 @@
       @fechar="fecharModal"
       @salvar="onSubmit($event)"
     />
+     <modal-detalhe
+      :edit="editarAtividade"
+      :show="showModalDetalhe"
+      @fechar="fecharModal"
+      @salvar="onSubmit($event)"
+    />
     <modal-delete
       :dialog="showDeleteModal"
       @fechar="showDeleteModal = false"
@@ -101,6 +113,7 @@ import {
 import AtividadeService from '../../service/Atividade/AtividadeService';
 import DinheiroFilter from '../../filter/dinheiro';
 import ModalCadastro from './ModalCadastro';
+import MOdalDetalhe from './Detalhes';
 import ModalDelete from '../../components/modal/ModalDelete';
 
 export default {
@@ -113,6 +126,7 @@ export default {
       showDeleteModal: false,
       AtividadeService: new AtividadeService(),
       showModal: false,
+       showModalDetalhe: false,
       editarAtividade: {},
       atividades: [],
       colors: {
@@ -167,6 +181,10 @@ export default {
     edit(item) {
       this.editarAtividade = { ...item };
       this.showModal = true;
+    },
+     editDetalhe(item) {
+      this.editarAtividade = { ...item };
+      this.showModalDetalhe = true;
     },
     async onSubmit(atividade) {
       await this.AtividadeService.createOrUpdate(atividade);

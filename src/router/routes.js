@@ -7,6 +7,7 @@ const routes = [
       { path: 'dashboard', component: () => import('pages/Dashboard/Dashboard.vue') },
       { path: 'cliente', component: () => import('pages/Cliente/ListaCliente.vue') },
       { path: 'atividade', component: () => import('pages/Atividade/ListaAtividade.vue') },
+      { path: 'detalhe', component: () => import('pages/Atividade/Detalhes.vue') },
       { path: 'usuario', component: () => import('pages/Usuario/ListaUsuario.vue') },
     ],
   },

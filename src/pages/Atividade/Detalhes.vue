@@ -3,59 +3,13 @@
     <q-dialog :value="show" @input="fechar">
       <q-card style="width: 700px; max-width: 100vw;">
         <q-card-section>
-          <div class="text-h6">Cadastro Atividade</div>
+          <div class="text-h6">Detalhes</div>
         </q-card-section>
 
         <q-card-section class="q-pt-none">
           <q-form>
             <div class="q-gutter-md">
-              <q-input
-                outlined
-                mask="##/##/####"
-                type="date"
-                fill-mask
-                v-model="atividade.datacadastro"
-                label="Data Inicio"
-              />
-              <q-input
-                outlined
-                mask="##/##/####"
-                type="date"
-                fill-mask
-                v-model="atividade.datafinalprevista"
-                label="Data Final Prevista"
-              />
-              <q-input
-                outlined
-                mask="##/##/####"
-                type="date"
-                fill-mask
-                v-model="atividade.datafinal"
-                label="Data Final"
-              />
-
-              <q-input outlined v-model="atividade.descricao" label="Descricao" />
-              <q-select filled v-model="atividade.imposto" :options="impostos" label="Impostos" />
-              <q-input outlined v-model="atividade.saving" label="Saving" />
-              <q-input outlined v-model="atividade.honorario" label="Honorario" />
-              <q-select
-                emit-value
-                map-options
-                filled
-                v-model="atividade.cliente_id"
-                :options="clientes"
-                label="Clientes"
-              />
-              <q-select filled v-model="atividade.faturado" :options="faturado" label="Faturado" />
-              <q-select filled v-model="atividade.status" :options="status" label="Status" />
-              <q-select
-                emit-value
-                map-options
-                filled
-                v-model="atividade.user_id"
-                :options="users"
-                label="Responsável"
-              />
+    
               <q-input outlined type="textarea" v-model="atividade.obs" label="Observações" />
             </div>
           </q-form>
@@ -73,7 +27,7 @@
             label="Salvar"
             @click="salvar"
             type="submit"
-            :loading="submitting"
+         
             class="q-mt-md"
             color="primary"
           />
