@@ -68,9 +68,9 @@
           />
            <q-btn
             @click="editDetalhe(props.row)"
-            color="gray"
+            color="grey"
             flat
-            icon="remove_red_eye"
+            icon="chat"
           />
         </q-td>
       </q-table>
@@ -113,20 +113,20 @@ import {
 import AtividadeService from '../../service/Atividade/AtividadeService';
 import DinheiroFilter from '../../filter/dinheiro';
 import ModalCadastro from './ModalCadastro';
-import MOdalDetalhe from './Detalhes';
+import ModalDetalhe from './Detalhes';
 import ModalDelete from '../../components/modal/ModalDelete';
 
 export default {
   name: 'ListaAtividade',
   components: {
-    QPage, QTable, QPageSticky, ModalCadastro, ModalDelete,
+    QPage, QTable, QPageSticky, ModalCadastro, ModalDelete, ModalDetalhe,
   },
   data() {
     return {
       showDeleteModal: false,
       AtividadeService: new AtividadeService(),
       showModal: false,
-       showModalDetalhe: false,
+      showModalDetalhe: false,
       editarAtividade: {},
       atividades: [],
       colors: {
@@ -182,7 +182,7 @@ export default {
       this.editarAtividade = { ...item };
       this.showModal = true;
     },
-     editDetalhe(item) {
+    editDetalhe(item) {
       this.editarAtividade = { ...item };
       this.showModalDetalhe = true;
     },
@@ -198,6 +198,7 @@ export default {
     },
     fecharModal() {
       this.showModal = false;
+      this.showModalDetalhe = false;
       this.editarAtividade = {};
     },
     showModalDelete(item) {

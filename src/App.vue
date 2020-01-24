@@ -7,5 +7,8 @@
 <script>
 export default {
   name: 'App',
+  // created() {
+  //   this.$q.light.set(true);
+  // },
 };
 </script>

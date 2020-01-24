@@ -46,18 +46,18 @@
           align="right"
           class="bg-white text-teal"
         >
-         <q-btn 
+         <q-btn
             class="q-mt-md"
             color="grey"
            label="Fechar"
-           @click="fechar" 
-           
+           @click="fechar"
+
            />
           <q-btn
             label="Salvar"
             @click="salvar"
             type="submit"
-            :loading="submitting"
+
             class="q-mt-md"
             color="primary"
           />
