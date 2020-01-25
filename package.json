@@ -16,7 +16,8 @@
     "axios": "^0.18.1",
     "hellojs": "^1.18.4",
     "quasar": "^1.0.0",
-    "query-string": "^6.10.1"
+    "query-string": "^6.10.1",
+    "vue-the-mask": "^0.11.1"
   },
   "devDependencies": {
     "@quasar/app": "^1.0.0",
