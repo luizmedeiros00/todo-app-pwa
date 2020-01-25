@@ -11,6 +11,10 @@ const routes = [
       { path: 'usuario', component: () => import('pages/Usuario/ListaUsuario.vue') },
     ],
   },
+  {
+    path: '/login',
+    component: () => import('pages/Login/Login.vue'),
+  },
 ];
 
 // Always leave this as last one
