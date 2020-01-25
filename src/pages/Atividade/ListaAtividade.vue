@@ -10,14 +10,14 @@
         :rows-per-page-options="[]"
         :pagination.sync="pagination"
         :loading="loading"
-
       >
-      <template v-slot:loading>
-        <q-inner-loading showing color="primary" />
-      </template>
+        <template v-slot:loading>
+          <q-inner-loading
+            showing
+            color="primary"
+          />
+        </template>
         <q-td
-
-
           slot="body-cell-descricao"
           slot-scope="item"
           :props="item"
@@ -95,11 +95,11 @@
         </q-td>
       </q-table>
 
-       <paginacao
-            :last_page="lastPage"
-            :current_page="currentPage"
-            @input="load($event)"
-          />
+      <paginacao
+        :last_page="lastPage"
+        :current_page="currentPage"
+        @input="load($event)"
+      />
 
       <q-page-sticky
         position="bottom-right"
@@ -132,7 +132,6 @@
       :item="editarAtividade"
     />
   </div>
-
 
 </template>
 

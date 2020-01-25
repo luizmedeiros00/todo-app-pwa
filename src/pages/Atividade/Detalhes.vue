@@ -69,8 +69,8 @@ export default {
     },
   },
   mounted() {
-    this.loadClientes();
-    this.loadUsers();
+    // this.loadClientes();
+    // this.loadUsers();
   },
   watch: {
     edit(newEdit) {

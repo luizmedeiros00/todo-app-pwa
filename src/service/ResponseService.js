@@ -1,4 +1,4 @@
-// import { showError } from '@/js/global/error';
+import { showError } from '../global/error';
 
 // eslint-disable-next-line no-nested-ternary
 const verifyErrorsData = data => (data && data !== {} ? (data.length > 1 ? data : data[0].errorMessage) : 'Existem erros a serem processados');
@@ -37,9 +37,9 @@ const ResponseService = (obj, type, description) => {
   return !navigator.onLine
     ? new Error('Sem acesso à internet, por favor, tente mais tarde')
     : (!response ? new Error('Servidor indisponivel, tente mais tarde')
-      : new Error(verifyStatusResponse(response, type, description)));
-  // : Vue.toasted.global.defaultError(verifyStatusResponse(response, type, description)))
-  // : showError(verifyStatusResponse(response, type, description)));
+      // : new Error(verifyStatusResponse(response, type, description)));
+    // : Vue.toasted.global.defaultError(verifyStatusResponse(response, type, description)))
+      : showError(verifyStatusResponse(response, type, description)));
 };
 
 export {

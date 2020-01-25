@@ -16,6 +16,7 @@
                 label="Nome"
               />
               <q-input
+               v-mask="['###.###.###-##', '##.###.###/####-##']"
                 outlined
                 v-model="cliente.cpfcnpj"
                 label="CPF ou CNPJ"
@@ -52,12 +53,15 @@
 import {
   QDialog, QForm,
 } from 'quasar';
+import { mask } from 'vue-the-mask';
+
 
 export default {
   name: 'ModalCadastroCliente',
   components: {
     QDialog, QForm,
   },
+  directives: { mask },
   props: ['show', 'edit'],
   data() {
     return {
