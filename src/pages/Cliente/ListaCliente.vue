@@ -131,9 +131,12 @@ export default {
       this.loading = true;
       const data = await this.ClienteService.search({}, page);
       this.loading = false;
-      this.lastPage = data.last_page;
-      this.currentPage = data.current_page;
-      this.clientes = data.data;
+      if(data.length > 0) {
+        this.lastPage = data.last_page;
+        this.currentPage = data.current_page;
+        this.clientes = data.data;
+      }
+      
     },
     onReset() {
       this.cliente = {};
