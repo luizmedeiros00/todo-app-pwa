@@ -11,51 +11,17 @@
         :pagination.sync="pagination"
         :loading="loading"
       >
-         <q-td
-          slot="body-cell-id"
-          slot-scope="item"
-          :props="item"
-        >
-          <q-icon
-            name="person"
-            size="1.5rem"
-            color="gray"
-          />
+        <q-td slot="body-cell-id" slot-scope="item" :props="item">
+          <q-icon name="person" size="1.5rem" color="gray" />
         </q-td>
-        <q-td
-          slot="body-cell-action"
-          slot-scope="props"
-          :props="props"
-        >
-          <q-btn
-            @click="edit(props.row)"
-            color="primary"
-            flat
-            icon="edit"
-          />
-          <q-btn
-            @click="showModalDelete(props.row)"
-            color="red"
-            flat
-            icon="delete"
-          />
+        <q-td slot="body-cell-action" slot-scope="props" :props="props">
+          <q-btn @click="edit(props.row)" color="primary" flat icon="edit" />
+          <q-btn @click="showModalDelete(props.row)" color="red" flat icon="delete" />
         </q-td>
       </q-table>
-       <paginacao
-            :last_page="lastPage"
-            :current_page="currentPage"
-            @input="load($event)"
-          />
-      <q-page-sticky
-        position="bottom-right"
-        :offset="[18, 18]"
-      >
-        <q-btn
-          @click="showModal = true"
-          fab
-          icon="add"
-          color="primary"
-        />
+      <paginacao :last_page="lastPage" :current_page="currentPage" @input="load($event)" />
+      <q-page-sticky position="bottom-right" :offset="[18, 18]">
+        <q-btn @click="showModal = true" fab icon="add" color="primary" />
       </q-page-sticky>
     </q-page>
     <modal-cadastro
@@ -64,7 +30,7 @@
       @fechar="fecharModal"
       @salvar="onSubmit($event)"
     />
-     <modal-delete
+    <modal-delete
       :dialog="showDeleteModal"
       @fechar="showDeleteModal = false"
       @deletar="deletar($event)"
@@ -74,7 +40,7 @@
 </template>
 <script>
 import {
-  QPage, QTable, QPageSticky, QInnerLoading, Notify
+  QPage, QTable, QPageSticky,
 } from 'quasar';
 import ClienteService from '../../service/Cliente/ClienteService';
 import ModalCadastro from './ModalCadastro';
@@ -84,7 +50,12 @@ import Paginacao from '../../components/table/Paginate';
 export default {
   name: 'ListaCliente',
   components: {
-    QPage, QTable, QPageSticky, ModalCadastro, ModalDelete, Paginacao, QInnerLoading
+    QPage,
+    QTable,
+    QPageSticky,
+    ModalCadastro,
+    ModalDelete,
+    Paginacao,
   },
   data() {
     return {
@@ -98,16 +69,28 @@ export default {
       clientes: [],
       columns: [
         {
-          name: 'id', label: '', field: 'id', align: 'center',
+          name: 'id',
+          label: '',
+          field: 'id',
+          align: 'center',
         },
         {
-          name: 'nome', label: 'Nome', field: 'nome', align: 'center',
+          name: 'nome',
+          label: 'Nome',
+          field: 'nome',
+          align: 'center',
         },
         {
-          name: 'cpfcnpj', label: 'CPF/CNPJ', field: 'cpfcnpj', align: 'center',
+          name: 'cpfcnpj',
+          label: 'CPF/CNPJ',
+          field: 'cpfcnpj',
+          align: 'center',
         },
         {
-          name: 'action', label: 'Ação', field: 'action', align: 'center',
+          name: 'action',
+          label: 'Ação',
+          field: 'action',
+          align: 'center',
         },
       ],
       pagination: {
@@ -123,7 +106,7 @@ export default {
     },
     async onSubmit(cliente) {
       await this.ClienteService.createOrUpdate(cliente);
-      this.notify()
+      this.notify();
       this.load();
       this.onReset();
       this.fecharModal();
@@ -132,10 +115,9 @@ export default {
       this.loading = true;
       const data = await this.ClienteService.search({}, page);
       this.loading = false;
-        this.lastPage = data.last_page;
-        this.currentPage = data.current_page;
-        this.clientes = data.data;
-      
+      this.lastPage = data.last_page;
+      this.currentPage = data.current_page;
+      this.clientes = data.data;
     },
     onReset() {
       this.cliente = {};
@@ -155,13 +137,12 @@ export default {
       this.load();
       this.notify();
     },
-    notify(){
+    notify() {
       this.$q.notify({
         message: 'Operação realizada com sucesso!',
-        color: 'green'
-      })
-    }
-
+        color: 'green',
+      });
+    },
   },
   mounted() {
     this.load();

@@ -53,7 +53,7 @@
 import {
   QDialog, QForm,
 } from 'quasar';
-import {mask} from 'vue-the-mask'
+import { mask } from 'vue-the-mask';
 
 
 export default {
@@ -61,7 +61,7 @@ export default {
   components: {
     QDialog, QForm,
   },
-  directives: {mask},
+  directives: { mask },
   props: ['show', 'edit'],
   data() {
     return {
