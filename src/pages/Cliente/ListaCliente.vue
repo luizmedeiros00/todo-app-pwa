@@ -74,7 +74,7 @@
 </template>
 <script>
 import {
-  QPage, QTable, QPageSticky, QInnerLoading,
+  QPage, QTable, QPageSticky, QInnerLoading, Notify
 } from 'quasar';
 import ClienteService from '../../service/Cliente/ClienteService';
 import ModalCadastro from './ModalCadastro';
@@ -84,7 +84,7 @@ import Paginacao from '../../components/table/Paginate';
 export default {
   name: 'ListaCliente',
   components: {
-    QPage, QTable, QPageSticky, ModalCadastro, ModalDelete, Paginacao, QInnerLoading,
+    QPage, QTable, QPageSticky, ModalCadastro, ModalDelete, Paginacao, QInnerLoading
   },
   data() {
     return {
@@ -123,6 +123,7 @@ export default {
     },
     async onSubmit(cliente) {
       await this.ClienteService.createOrUpdate(cliente);
+      this.notify()
       this.load();
       this.onReset();
       this.fecharModal();
@@ -131,11 +132,9 @@ export default {
       this.loading = true;
       const data = await this.ClienteService.search({}, page);
       this.loading = false;
-      if(data.length > 0) {
         this.lastPage = data.last_page;
         this.currentPage = data.current_page;
         this.clientes = data.data;
-      }
       
     },
     onReset() {
@@ -154,7 +153,14 @@ export default {
       await this.ClienteService.remove(item.id);
       this.showDeleteModal = false;
       this.load();
+      this.notify();
     },
+    notify(){
+      this.$q.notify({
+        message: 'Operação realizada com sucesso!',
+        color: 'green'
+      })
+    }
 
   },
   mounted() {
