@@ -22,7 +22,7 @@
           slot-scope="item"
           :props="item"
         >
-          {{item.row.descricao.length > 100 ? `${item.row.descricao.substring(0,100)}...`
+          {{item.row.descricao.length > 40 ? `${item.row.descricao.substring(0,40)}...`
             : item.row.descricao}}
         </q-td>
 
@@ -178,7 +178,7 @@ export default {
           name: 'datacadastro', label: 'Data Inicio', field: 'datacadastro', align: 'center', format: val => DataFilter(val),
         },
         {
-          name: 'datafinalprevista', label: 'Data Final Prevista', field: 'datafinalprevista', align: 'center', format: val => DataFilter(val),
+          name: 'datafinalprevista', label: 'Data Prevista', field: 'datafinalprevista', align: 'center', format: val => DataFilter(val),
         },
         {
           name: 'datafinal', label: 'Data Final', field: 'datafinal', align: 'center', format: val => DataFilter(val),

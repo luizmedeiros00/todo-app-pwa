@@ -115,7 +115,7 @@ export default {
       },
       columns: [
         {
-          name: 'id', label: '', field: 'id', align: 'center',
+          name: 'id', style: 'min-width: 15px; width: 15px',label: '', field: 'id', align: 'center',
         },
         {
           name: 'name', label: 'Nome', field: 'name', align: 'left',
