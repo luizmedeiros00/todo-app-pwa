@@ -1,3 +1,17 @@
+import store from '../store/index';
+
+const ifAuthenticated = (to, from, next) => {
+  if (store.getters['auth/isAuthenticated']) {
+    // if (to.matched.some(record => record.meta.admin)) {
+    //   localStorage.getItem('user-admin') == 0 ? next('/') : next();
+    // }
+
+    next();
+    return;
+  }
+
+  next('/login');
+};
 
 const routes = [
   {
@@ -10,6 +24,7 @@ const routes = [
       { path: 'detalhe', component: () => import('pages/Atividade/Detalhes.vue') },
       { path: 'usuario', component: () => import('pages/Usuario/ListaUsuario.vue') },
     ],
+    beforeEnter: ifAuthenticated,
   },
   {
     path: '/login',

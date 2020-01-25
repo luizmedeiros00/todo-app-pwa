@@ -34,6 +34,7 @@
               </q-card-section>
               <q-card-actions class="q-px-md">
                 <q-btn
+                  @click.prevent="login()"
                   unelevated
                   color="light-green-7"
                   size="lg"
@@ -71,7 +72,7 @@ export default {
   },
   methods: {
     login() {
-      this.$store.dispatch('auth', this.user).then(() => {
+      this.$store.dispatch('auth/AUTH_REQUEST', this.user).then(() => {
         this.$router.push({ path: '/' });
       });
     },

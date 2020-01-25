@@ -7,8 +7,10 @@
 <script>
 export default {
   name: 'App',
-  // created() {
-  //   this.$q.light.set(true);
-  // },
+  created() {
+    if (this.$store.getters['auth/isAuthenticated']) {
+      this.$store.dispatch('user/USER_REQUEST');
+    }
+  },
 };
 </script>
