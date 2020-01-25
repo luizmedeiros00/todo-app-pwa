@@ -1,0 +1,10 @@
+{
+  "name": "dist",
+  "version": "1.0.0",
+  "description": "app pwa",
+  "scripts": {
+    "postinstall": "npm install express"
+  },
+  "author": "luiz medeiros",
+  "license": "ISC"
+}
