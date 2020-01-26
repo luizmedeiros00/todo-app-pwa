@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "app pwa",
   "scripts": {
-    "postinstall": "npm install express"
+    "postinstall": "npm run build",
+    "start": "node server.js"
   },
   "author": "luiz medeiros",
   "license": "ISC"
