@@ -2,11 +2,11 @@
   <div class="modal-cadastro-atividade">
     <q-dialog :value="show" @input="fechar">
       <q-card style="width: 700px; max-width: 100vw;">
-        <q-card-section>
+        <q-card-section class="bg-orange text-white">
           <div class="text-h6">Cadastro Atividade</div>
         </q-card-section>
 
-        <q-card-section class="q-pt-none">
+        <q-card-section >
           <q-form>
             <div class="q-gutter-md">
               <q-input

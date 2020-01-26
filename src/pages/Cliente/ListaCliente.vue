@@ -69,22 +69,13 @@ export default {
       clientes: [],
       columns: [
         {
-          name: 'id',
-          label: '',
-          field: 'id',
-          align: 'center',
+          name: 'id', style: 'min-width: 15px; width: 15px',label: '', field: 'id', align: 'center',
         },
         {
-          name: 'nome',
-          label: 'Nome',
-          field: 'nome',
-          align: 'center',
+          name: 'nome',  sortable: true,label: 'Nome', field: 'nome', align: 'left',
         },
         {
-          name: 'cpfcnpj',
-          label: 'CPF/CNPJ',
-          field: 'cpfcnpj',
-          align: 'center',
+          name: 'cpfcnpj', label: 'CPF/CNPJ', field: 'cpfcnpj', align: 'left',
         },
         {
           name: 'action',

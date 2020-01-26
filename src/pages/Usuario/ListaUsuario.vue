@@ -88,6 +88,7 @@ import {
   QPage, QTable, QPageSticky, QInnerLoading,
 } from 'quasar';
 import UsuarioService from '../../service/Usuario/UsuarioService';
+import RegisterService from '../../service/Register/RegisterService';
 import ModalCadastro from './ModalCadastro';
 import ModalDelete from '../../components/modal/ModalDelete';
 import Paginacao from '../../components/table/Paginate';
@@ -103,6 +104,7 @@ export default {
       currentPage: 0,
       lastPage: 0,
       UsuarioService: new UsuarioService(),
+      RegisterService: new RegisterService(),
       showModal: false,
       showDeleteModal: false,
       editarUsuario: {},
@@ -110,12 +112,12 @@ export default {
       colors: {
         Administrador: () => 'primary',
         Coordenador: () => 'amber',
-        Usuario: () => 'gray',
+        Usuario: () => 'grey',
         default: () => 'red',
       },
       columns: [
         {
-          name: 'id', label: '', field: 'id', align: 'center',
+          name: 'id', style: 'min-width: 15px; width: 15px',label: '', field: 'id', align: 'center',
         },
         {
           name: 'name', label: 'Nome', field: 'name', align: 'left',
@@ -145,7 +147,7 @@ export default {
       this.showModal = true;
     },
     async onSubmit(usuario) {
-      await this.UsuarioService.createOrUpdate(usuario);
+      await this.RegisterService.createOrUpdate(usuario);
       this.load();
       this.onReset();
       this.fecharModal();
