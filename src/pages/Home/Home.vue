@@ -51,7 +51,6 @@ export default {
   methods: {
     async loadAtividades() {
       const data = await this.AtividadeService.totalAtividades();
-      console.log(data);
       this.totalAtividades = data;
     },
 
