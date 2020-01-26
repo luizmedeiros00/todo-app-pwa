@@ -6,6 +6,7 @@
             <img src="http://ramaral.com/wp-content/themes/ramaral/framework/images/logo.png" width="240px">
          <!-- </a>     -->
          </div>
+           <div class="text-grey text-weight-light">Módulo Tributário</div>
    </q-page>
 </template>
 

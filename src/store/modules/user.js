@@ -10,7 +10,7 @@ const getters = {
 const actions = {
   USER_REQUEST: ({ commit, dispatch }) => {
     commit('USER_REQUEST');
-    http.get('http://192.168.0.100:9005/api/me')
+    http.get('http://191.190.100.27:9005/api/me')
       .then((resp) => {
         commit('USER_SUCCESS', resp.data);
       })

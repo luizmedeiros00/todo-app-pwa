@@ -68,12 +68,12 @@ export default {
     atualiza() {
       setInterval(() => {
         this.loadAtividades();
-      }, 5000);
+      }, 10000);
     },
 
   },
   created() {
-    //this.atualiza();
+    this.atualiza();
     this.loadAtividades();
   },
 
