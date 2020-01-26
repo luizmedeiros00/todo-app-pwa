@@ -1,6 +1,9 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated class="bg-orange">
+    <q-header
+      elevated
+      class="primary"
+    >
       <q-toolbar>
         <q-btn
           flat
@@ -13,13 +16,34 @@
 
         <q-toolbar-title>Ramaral</q-toolbar-title>
 
-        <div>v.1.20.0</div>
+        <!-- <q-btn flat round dense icon="more_vert" /> -->
+        <q-btn-dropdown
+          flat round dense
+        >
+          <q-list>
+
+            <q-item
+              clickable
+              v-close-popup
+              @click="logout"
+            >
+              <q-item-section>
+                <q-item-label>Sair</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-btn-dropdown>
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered content-class="bg-grey-2">
+    <q-drawer
+      v-model="leftDrawerOpen"
+      show-if-above
+      bordered
+      content-class="primary"
+    >
       <q-list>
-        <q-item-label header>Menu</q-item-label>
+        <q-item-label header >Menu</q-item-label>
         <q-item to="dashboard">
           <q-item-section avatar>
             <q-icon name="poll" />
@@ -56,22 +80,6 @@
             <q-item-label caption>Usuarios do sistema</q-item-label>
           </q-item-section>
         </q-item>
-        <!-- 
-          Informações de registro do sistema, por enquanto nao vamos utilizar
-          <q-item to="#" @click="showModal()">
-          <q-item-section avatar>
-            <q-icon name="account_box" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Sobre</q-item-label>
-            <q-item-label caption>Sobre o sistema</q-item-label>
-          </q-item-section>
-        </q-item> 
-         <modal-sobre
-      :dialog="showModalSobre"
-      @fechar="showModalSobre = false"
-    /> 
-    -->
       </q-list>
     </q-drawer>
 
@@ -80,26 +88,27 @@
     </q-page-container>
   </q-layout>
 </template>
-
-
 <script>
-import ModalSobre from "../components/modal/ModalSobre";
+import { QBtnDropdown } from 'quasar';
+
 export default {
-  name: "MyLayout",
+  name: 'MyLayout',
+  components: { QBtnDropdown },
   data() {
     return {
-      showModalSobre:false,
-      leftDrawerOpen:false
+      showModalSobre: false,
+      leftDrawerOpen: false,
     };
   },
-  components: {
-    ModalSobre
-  },
   methods: {
+    logout() {
+      this.$store.dispatch('auth/AUTH_LOGOUT').then(() => {
+        this.$router.push('/login');
+      });
+    },
     showModal() {
-    
-      this.showModalSobre=true;
-    }
-  }
+      this.showModalSobre = true;
+    },
+  },
 };
 </script>

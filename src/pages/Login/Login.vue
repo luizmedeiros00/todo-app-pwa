@@ -34,7 +34,7 @@
                 <q-btn
                   @click.prevent="login()"
                   unelevated
-                  color="orange-7"
+                  color="primary"
                   size="lg"
                   class="full-width"
                   label="Login"
@@ -73,9 +73,6 @@ export default {
         this.$router.push({ path: '/' });
       });
     },
-  },
-  created() {
-    console.info(process.env.API_URL);
   },
 };
 </script>
