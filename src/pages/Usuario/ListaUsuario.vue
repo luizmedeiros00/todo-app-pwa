@@ -112,7 +112,7 @@ export default {
       colors: {
         Administrador: () => 'primary',
         Coordenador: () => 'amber',
-        Usuario: () => 'gray',
+        Usuario: () => 'grey',
         default: () => 'red',
       },
       columns: [

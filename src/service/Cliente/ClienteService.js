@@ -1,7 +1,7 @@
 import Api from '../Api';
 
-export default class RegisterService extends Api {
+export default class ClienteService extends Api {
   constructor() {
-    super('/register');
+    super('/clientes');
   }
 }

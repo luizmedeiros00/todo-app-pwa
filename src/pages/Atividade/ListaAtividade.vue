@@ -199,7 +199,7 @@ export default {
           name: 'honorario', label: 'Honorario', field: 'honorario', align: 'center', format: val => DinheiroFilter(val),
         },
         {
-          name: 'cliente', label: 'Cliente', field: 'cliente', align: 'center',
+          name: 'cliente', label: 'Responsável', field: 'cliente', align: 'center',
         },
         {
           name: 'faturado', label: 'Faturado', field: 'faturado', align: 'center',

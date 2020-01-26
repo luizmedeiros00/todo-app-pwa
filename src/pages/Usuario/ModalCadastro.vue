@@ -5,11 +5,11 @@
       @input="fechar"
     >
       <q-card style="width: 700px; max-width: 100vw;">
-        <q-card-section>
+        <q-card-section class="bg-orange text-white">
           <div class="text-h6">Cadastro Usuario</div>
         </q-card-section>
 
-        <q-card-section class="q-pt-none">
+        <q-card-section >
           <q-form>
             <input
               type="hidden"
@@ -22,11 +22,13 @@
                 label="Nome"
               />
               <q-input
+                 :readonly="edit.id!=null"
                 outlined
                 v-model="usuario.email"
                 label="Email"
               />
               <q-input
+               :readonly="edit.id!=null"
                 v-model="usuario.password"
                 outlined
                 type="password"

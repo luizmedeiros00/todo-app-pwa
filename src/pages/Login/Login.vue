@@ -1,16 +1,14 @@
 <template>
   <q-layout>
     <q-page-container>
-      <q-page class="bg-light-white window-height window-width row justify-center items-center">
-        <div class="column">
+      <q-page class="bg-white  row justify-center items-center">
+         <div class="q-pa-md row items-start q-gutter-md">
+         <a href="http://ramaral.com">
+            <img src="http://ramaral.com/wp-content/themes/ramaral/framework/images/logo.png" width="300px">
+         </a>      
+         </div>
           <div class="row">
-            <h5 class="text-h5 text-white q-my-md"></h5>
-          </div>
-          <div class="row">
-            <q-card
-              square
-              bordered
-              class="q-pa-lg shadow-1"
+            <q-card   
             >
               <q-card-section>
                 <q-form class="q-gutter-md">
@@ -36,7 +34,7 @@
                 <q-btn
                   @click.prevent="login()"
                   unelevated
-                  color="light-green-7"
+                  color="orange-7"
                   size="lg"
                   class="full-width"
                   label="Login"
