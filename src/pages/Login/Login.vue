@@ -35,7 +35,7 @@
                   @click.prevent="login()"
                   unelevated
                   color="orange-7"
-                  size="lg"
+                  size="md"
                   class="full-width"
                   label="Login"
                 />
