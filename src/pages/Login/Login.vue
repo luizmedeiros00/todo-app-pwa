@@ -1,10 +1,10 @@
 <template>
   <q-layout>
     <q-page-container>
-      <q-page class="bg-light-green window-height window-width row justify-center items-center">
+      <q-page class="window-height window-width row justify-center items-center">
         <div class="column">
           <div class="row">
-            <h5 class="text-h5 text-white q-my-md"></h5>
+            <h5 class="text-h5 q-my-md">Login</h5>
           </div>
           <div class="row">
             <q-card
@@ -36,7 +36,7 @@
                 <q-btn
                   @click.prevent="login()"
                   unelevated
-                  color="light-green-7"
+                  color="primary"
                   size="lg"
                   class="full-width"
                   label="Login"
@@ -76,6 +76,9 @@ export default {
         this.$router.push({ path: '/' });
       });
     },
+  },
+  created() {
+    console.info(process.env.API_URL);
   },
 };
 </script>

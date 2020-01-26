@@ -8,7 +8,7 @@ const getters = {
 const actions = {
   AUTH_REQUEST: ({ commit, dispatch }, user) => new Promise((resolve, reject) => {
     commit('AUTH_REQUEST');
-    http.post('http://191.190.100.27:9005/api/login', user).then((resp) => {
+    http.post(`${process.env.API_URL}/login`, user).then((resp) => {
       const token = `${resp.data.token_type} ${resp.data.access_token}`;
       localStorage.setItem('user-token', token);
       // window.axios.defaults.headers.common.Authorization = token;

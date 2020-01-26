@@ -1,6 +1,12 @@
 // Configuration for your app
 // https://quasar.dev/quasar-cli/quasar-conf-js
 
+const webpack = require('webpack');
+const path = require('path');
+
+// Get our env variables
+const envparser = require('./config/envparser');
+
 module.exports = function (ctx) {
   return {
     // app boot file (/src/boot)
@@ -59,6 +65,7 @@ module.exports = function (ctx) {
       showProgress: true,
       gzip: false,
       analyze: false,
+      env: envparser(),
       // Options below are automatically set depending on the env, set them if you want to override
       // preloadChunks: false,
       // extractCSS: false,
