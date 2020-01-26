@@ -65,7 +65,7 @@ export default {
     atualiza() {
       setInterval(() => {
         this.loadAtividades();
-      }, 5000);
+      }, 10000);
     },
 
   },
