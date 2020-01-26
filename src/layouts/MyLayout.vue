@@ -44,7 +44,7 @@
     >
       <q-list>
         <q-item-label header >Menu</q-item-label>
-        <q-item to="dashboard">
+        <q-item to="/">
           <q-item-section avatar>
             <q-icon name="poll" />
           </q-item-section>
