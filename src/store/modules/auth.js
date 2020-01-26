@@ -8,7 +8,11 @@ const getters = {
 const actions = {
   AUTH_REQUEST: ({ commit, dispatch }, user) => new Promise((resolve, reject) => {
     commit('AUTH_REQUEST');
+<<<<<<< HEAD
     http.post('http://192.168.0.100:9005/api/login', user).then((resp) => {
+=======
+    http.post('http://191.190.100.27:9005/api/login', user).then((resp) => {
+>>>>>>> a87e407ee62f97633648ae5d4dba50054a93fd94
       const token = `${resp.data.token_type} ${resp.data.access_token}`;
       localStorage.setItem('user-token', token);
       // window.axios.defaults.headers.common.Authorization = token;
