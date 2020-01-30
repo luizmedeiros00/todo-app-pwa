@@ -3,7 +3,7 @@ import { http } from '../../service/Http';
 
 const getters = {
   isAdmin: state => state.user.admin,
-  getUser: state => state.user,
+  nomeUser: state => state.user.name,
   isUserLoaded: state => !!state.user.name,
 };
 

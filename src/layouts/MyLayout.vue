@@ -17,7 +17,7 @@
         <q-toolbar-title>Menu </q-toolbar-title>
 
         <!-- <q-btn flat round dense icon="more_vert" /> -->
-        <span style="fontSize:14px;textAling:right">{{usuario}}</span>
+        <span style="fontSize:14px;textAling:right">{{nomeUser}}</span>
         <q-btn-dropdown
           flat round dense        >
           <q-list>
@@ -90,20 +90,22 @@
 </template>
 <script>
 import { QBtnDropdown } from 'quasar';
+import { mapGetters } from 'vuex';
 import UsuarioService from '../service/Usuario/UsuarioService';
 
 export default {
- 
+
   name: 'MyLayout',
   components: { QBtnDropdown },
+  computed: { ...mapGetters('user', ['nomeUser']) },
   data() {
     return {
       versao: process.env.APP_VERSAO,
       UsuarioService: new UsuarioService(),
       showModalSobre: false,
       leftDrawerOpen: false,
-      usuario:'',
-         };
+      usuario: null,
+    };
   },
   methods: {
     logout() {
@@ -114,14 +116,6 @@ export default {
     showModal() {
       this.showModalSobre = true;
     },
-    loadUserName() {
-    this.usuario = this.$store.state.user.user.email;
-    console.log(this.usuario)
-       
-    },
-  },
-  created() {
-    this.loadUserName();
   },
 
 
