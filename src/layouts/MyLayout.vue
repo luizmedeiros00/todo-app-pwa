@@ -14,12 +14,12 @@
           aria-label="Menu"
         />
 
-        <q-toolbar-title>Ramaral</q-toolbar-title>
+        <q-toolbar-title>Menu </q-toolbar-title>
 
         <!-- <q-btn flat round dense icon="more_vert" /> -->
+        <span style="fontSize:14px;textAling:right">{{usuario}}</span>
         <q-btn-dropdown
-          flat round dense
-        >
+          flat round dense        >
           <q-list>
 
             <q-item
@@ -90,15 +90,20 @@
 </template>
 <script>
 import { QBtnDropdown } from 'quasar';
+import UsuarioService from '../service/Usuario/UsuarioService';
 
 export default {
+ 
   name: 'MyLayout',
   components: { QBtnDropdown },
   data() {
     return {
+      versao: process.env.APP_VERSAO,
+      UsuarioService: new UsuarioService(),
       showModalSobre: false,
       leftDrawerOpen: false,
-    };
+      usuario:'',
+         };
   },
   methods: {
     logout() {
@@ -109,6 +114,16 @@ export default {
     showModal() {
       this.showModalSobre = true;
     },
+    loadUserName() {
+    this.usuario = this.$store.state.user.user.email;
+    console.log(this.usuario)
+       
+    },
   },
+  created() {
+    this.loadUserName();
+  },
+
+
 };
 </script>

@@ -1,8 +1,8 @@
 {
   "name": "todo-app",
   "version": "0.0.1",
-  "description": "A Quasar Framework app",
-  "productName": "Quasar App",
+  "description": "R.Amaral - Modulo tributario",
+  "productName": "R.Amaral",
   "cordovaId": "org.cordova.quasar.app",
   "capacitorId": "",
   "author": "Luiz Medeiros <luizmedeiros00@gmail.com>",
