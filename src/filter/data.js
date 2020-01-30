@@ -7,6 +7,8 @@
 
 
 export default (value) => {
+  if (value){
   const [year, month, day] = value.split('-');
   return `${day}/${month}/${year}`;
+  }
 };
