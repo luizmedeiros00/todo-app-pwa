@@ -78,6 +78,7 @@ export default {
           this.$q.notify({
             message: 'Usuário ou senha inválida',
             color: 'red',
+            position: 'top',
           });
         });
     },

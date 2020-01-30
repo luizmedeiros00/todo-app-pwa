@@ -4,6 +4,8 @@
             :value="current_page"
             color="orange-8"
             :max="last_page"
+            :max-pages="6"
+            :min-pages="3"
             :boundary-links="true"
             @input="val => onPageChange(val)"
           >
