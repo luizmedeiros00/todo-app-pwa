@@ -74,13 +74,13 @@
           slot-scope="props"
           :props="props"
         >
-          <q-btn
+          <q-btn v-if="isAdmin || isCoordenador"
             @click="edit(props.row)"
             color="primary"
             flat
             icon="edit"
           />
-          <q-btn
+          <q-btn v-if="isAdmin || isCoordenador"
             @click="showModalDelete(props.row)"
             color="red"
             flat
@@ -90,6 +90,7 @@
             @click="editDetalhe(props.row)"
             color="grey"
             flat
+            placeholder="Detalhes da atividade"
             icon="chat"
           />
         </q-td>
@@ -139,6 +140,7 @@
 import {
   QPage, QTable, QPageSticky, QInnerLoading,
 } from 'quasar';
+import { mapGetters } from 'vuex';
 import AtividadeService from '../../service/Atividade/AtividadeService';
 import DinheiroFilter from '../../filter/dinheiro';
 import DataFilter from '../../filter/data';
@@ -149,6 +151,7 @@ import Paginacao from '../../components/table/Paginate';
 
 export default {
   name: 'ListaAtividade',
+  computed: { ...mapGetters('user', ['nomeUser', 'isAdmin', 'isCoordenador']) },
   components: {
     QPage, QTable, QPageSticky, ModalCadastro, ModalDelete, ModalDetalhe, Paginacao, QInnerLoading,
   },
@@ -205,7 +208,7 @@ export default {
           name: 'faturado', label: 'Faturado', field: 'faturado', align: 'center',
         },
         {
-          name: 'action', label: 'Ação', field: 'action', align: 'center',
+          name: 'action', label: 'Opções', field: 'action', align: 'center',
         },
       ],
       pagination: {

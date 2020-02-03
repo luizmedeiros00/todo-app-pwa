@@ -71,13 +71,13 @@
             <q-item-label caption>Lista de atividades</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item to="usuario">
+        <q-item  v-if="isAdmin" to="usuario">
           <q-item-section avatar>
             <q-icon name="account_box" />
           </q-item-section>
           <q-item-section>
             <q-item-label>Usuarios</q-item-label>
-            <q-item-label caption>Usuarios do sistema</q-item-label>
+            <q-item-label caption>Usuarios do sistema {{isAdmin}}</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
@@ -97,7 +97,7 @@ export default {
 
   name: 'MyLayout',
   components: { QBtnDropdown },
-  computed: { ...mapGetters('user', ['nomeUser']) },
+  computed: { ...mapGetters('user', ['nomeUser', 'isAdmin']) },
   data() {
     return {
       versao: process.env.APP_VERSAO,
