@@ -5,7 +5,7 @@
         <div class="q-pa-md row items-start q-gutter-md">
           <a href="http://ramaral.com">
             <img
-              src="http://ramaral.com/wp-content/themes/ramaral/framework/images/logo.png"
+              src="http://ramaral.com/novo/wp-content/uploads/thegem-logos/logo_7ef243c4b958eb1391f209dbe1b33f4a_1x.png"
               width="300px"
             >
           </a>
