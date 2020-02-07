@@ -1,4 +1,5 @@
 import { showError } from '../global/error';
+import store from '../store/index';
 
 // eslint-disable-next-line no-nested-ternary
 const verifyErrorsData = data => (data && data !== {} ? (data.length > 1 ? data : data[0].errorMessage) : 'Existem erros a serem processados');
@@ -31,14 +32,16 @@ const verifyStatusResponse = (response, type, description) => {
   return (statusHttp[response.status] || statusHttp.default)();
 };
 
+
 const ResponseService = (obj, type, description) => {
   const { response } = JSON.parse(JSON.stringify(obj));
 
   // eslint-disable-next-line no-nested-ternary
   return !navigator.onLine
     // eslint-disable-next-line no-alert
-    ? alert('Sem acesso à internet, por favor, tente mais tarde')
-    : (!response ? alert('Servidor indisponivel, tente mais tarde')
+    // ? alert('Sem acesso à internet, por favor, tente mais tarde')
+    ? store.commit('dialog/SHOW', true)
+    : (!response ? store.commit('dialog/SHOW', true)
       // : new Error(verifyStatusResponse(response, type, description)));
     // : Vue.toasted.global.defaultError(verifyStatusResponse(response, type, description)))
       : showError(verifyStatusResponse(response, type, description)));
