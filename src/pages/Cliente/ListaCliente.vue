@@ -42,6 +42,7 @@
 import {
   QPage, QTable, QPageSticky,
 } from 'quasar';
+import { mapState } from 'vuex';
 import ClienteService from '../../service/Cliente/ClienteService';
 import ModalCadastro from './ModalCadastro';
 import ModalDelete from '../../components/modal/ModalDelete';
@@ -57,6 +58,7 @@ export default {
     ModalDelete,
     Paginacao,
   },
+  computed: { ...mapState('dialog', ['alert']) },
   data() {
     return {
       loading: false,

@@ -86,17 +86,19 @@
     <q-page-container>
       <router-view />
     </q-page-container>
+    <modal-dialog />
   </q-layout>
 </template>
 <script>
 import { QBtnDropdown } from 'quasar';
 import { mapGetters } from 'vuex';
 import UsuarioService from '../service/Usuario/UsuarioService';
+import ModalDialog from '../components/modal/ModalDialog';
 
 export default {
 
   name: 'MyLayout',
-  components: { QBtnDropdown },
+  components: { QBtnDropdown, ModalDialog },
   computed: { ...mapGetters('user', ['nomeUser', 'isAdmin']) },
   data() {
     return {
