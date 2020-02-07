@@ -33,10 +33,12 @@ const verifyStatusResponse = (response, type, description) => {
 
 const ResponseService = (obj, type, description) => {
   const { response } = JSON.parse(JSON.stringify(obj));
+
   // eslint-disable-next-line no-nested-ternary
   return !navigator.onLine
-    ? new Error('Sem acesso à internet, por favor, tente mais tarde')
-    : (!response ? new Error('Servidor indisponivel, tente mais tarde')
+    // eslint-disable-next-line no-alert
+    ? alert('Sem acesso à internet, por favor, tente mais tarde')
+    : (!response ? alert('Servidor indisponivel, tente mais tarde')
       // : new Error(verifyStatusResponse(response, type, description)));
     // : Vue.toasted.global.defaultError(verifyStatusResponse(response, type, description)))
       : showError(verifyStatusResponse(response, type, description)));
