@@ -108,7 +108,7 @@ module.exports = function (ctx) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: 'R. Amaral - Tributario',
+        name: 'R. Amaral - Tributário',
         short_name: 'R. Amaral',
         description: 'Aplicativo para controle de tarefas',
         display: 'standalone',
@@ -118,27 +118,27 @@ module.exports = function (ctx) {
         icons: [
           {
             src: 'statics/icons/icon-128x128.png',
-            sizes: '512x512 192x192 64x64 32x32 24x24 16x16',
+            sizes: '512x512',
             type: 'image/png',
           },
           {
             src: 'statics/icons/icon-192x192.png',
-            sizes: '512x512 192x192 64x64 32x32 24x24 16x16',
+            sizes: '512x512',
             type: 'image/png',
           },
           {
             src: 'statics/icons/icon-256x256.png',
-            sizes: '512x512 192x192 64x64 32x32 24x24 16x16',
+            sizes: '512x512',
             type: 'image/png',
           },
           {
             src: 'statics/icons/icon-384x384.png',
-            sizes: '512x512 192x192 64x64 32x32 24x24 16x16',
+            sizes: '512x512',
             type: 'image/png',
           },
           {
             src: 'statics/icons/icon-512x512.png',
-            sizes: '512x512 192x192 64x64 32x32 24x24 16x16',
+            sizes: '512x512',
             type: 'image/png',
           },
         ],
