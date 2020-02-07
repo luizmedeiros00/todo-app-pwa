@@ -36,6 +36,7 @@
       @deletar="deletar($event)"
       :item="editarCliente"
     />
+    <footer-component />
   </div>
 </template>
 <script>
@@ -47,6 +48,7 @@ import ClienteService from '../../service/Cliente/ClienteService';
 import ModalCadastro from './ModalCadastro';
 import ModalDelete from '../../components/modal/ModalDelete';
 import Paginacao from '../../components/table/Paginate';
+import FooterComponent from '../../components/footer/Footer';
 
 export default {
   name: 'ListaCliente',
@@ -57,6 +59,7 @@ export default {
     ModalCadastro,
     ModalDelete,
     Paginacao,
+    FooterComponent,
   },
   computed: { ...mapState('dialog', ['alert']) },
   data() {
