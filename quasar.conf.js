@@ -108,9 +108,9 @@ module.exports = function (ctx) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: 'R Amaral App',
-        short_name: 'R Amaral',
-        description: 'Aplicativo para control de tarefas',
+        name: 'R. Amaral - Tributario',
+        short_name: 'R. Amaral',
+        description: 'Aplicativo para controle de tarefas',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
