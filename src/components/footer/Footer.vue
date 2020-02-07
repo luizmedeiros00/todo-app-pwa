@@ -1,7 +1,7 @@
 <template>
-     <q-footer elevated>
-        <q-toolbar class="bg-orange-8 text-white">
-          <q-toolbar-title >R. Amaral - Modulo Tributário</q-toolbar-title>
+     <q-footer elevated >
+        <q-toolbar class="bg-orange-8 text-white center ">
+          <q-toolbar-title class="text-subtitle1 text-weight-light">R. Amaral - Modulo Tributário</q-toolbar-title>
         </q-toolbar>
       </q-footer>
 </template>
