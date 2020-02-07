@@ -132,6 +132,8 @@
       @deletar="deletar($event)"
       :item="editarAtividade"
     />
+      <footer-component />
+
   </div>
 
 </template>
@@ -146,6 +148,7 @@ import DinheiroFilter from '../../filter/dinheiro';
 import DataFilter from '../../filter/data';
 import ModalCadastro from './ModalCadastro';
 import ModalDetalhe from './Detalhes';
+import FooterComponent from '../../components/footer/Footer';
 import ModalDelete from '../../components/modal/ModalDelete';
 import Paginacao from '../../components/table/Paginate';
 
@@ -153,7 +156,7 @@ export default {
   name: 'ListaAtividade',
   computed: { ...mapGetters('user', ['nomeUser', 'isAdmin', 'isCoordenador']) },
   components: {
-    QPage, QTable, QPageSticky, ModalCadastro, ModalDelete, ModalDetalhe, Paginacao, QInnerLoading,
+    QPage, QTable, QPageSticky, ModalCadastro, ModalDelete, ModalDetalhe, Paginacao, QInnerLoading, FooterComponent,
   },
   data() {
     return {

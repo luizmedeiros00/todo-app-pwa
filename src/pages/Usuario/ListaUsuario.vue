@@ -81,6 +81,7 @@
       @deletar="deletar($event)"
       :item="editarUsuario"
     />
+    <footer-component />
   </div>
 </template>
 <script>
@@ -92,11 +93,12 @@ import RegisterService from '../../service/Register/RegisterService';
 import ModalCadastro from './ModalCadastro';
 import ModalDelete from '../../components/modal/ModalDelete';
 import Paginacao from '../../components/table/Paginate';
+import FooterComponent from '../../components/footer/Footer';
 
 export default {
   name: 'ListaUsuario',
   components: {
-    QPage, QTable, QPageSticky, ModalCadastro, ModalDelete, QInnerLoading, Paginacao,
+    QPage, QTable, QPageSticky, ModalCadastro, ModalDelete, QInnerLoading, Paginacao, FooterComponent,
   },
   data() {
     return {
@@ -117,7 +119,7 @@ export default {
       },
       columns: [
         {
-          name: 'id', style: 'min-width: 15px; width: 15px',label: '', field: 'id', align: 'center',
+          name: 'id', style: 'min-width: 15px; width: 15px', label: '', field: 'id', align: 'center',
         },
         {
           name: 'name', label: 'Nome', field: 'name', align: 'left',
