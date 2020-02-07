@@ -118,27 +118,27 @@ module.exports = function (ctx) {
         icons: [
           {
             src: 'statics/icons/icon-128x128.png',
-            sizes: '128x128',
+            sizes: '512x512 192x192 64x64 32x32 24x24 16x16',
             type: 'image/png',
           },
           {
             src: 'statics/icons/icon-192x192.png',
-            sizes: '192x192',
+            sizes: '512x512 192x192 64x64 32x32 24x24 16x16',
             type: 'image/png',
           },
           {
             src: 'statics/icons/icon-256x256.png',
-            sizes: '256x256',
+            sizes: '512x512 192x192 64x64 32x32 24x24 16x16',
             type: 'image/png',
           },
           {
             src: 'statics/icons/icon-384x384.png',
-            sizes: '384x384',
+            sizes: '512x512 192x192 64x64 32x32 24x24 16x16',
             type: 'image/png',
           },
           {
             src: 'statics/icons/icon-512x512.png',
-            sizes: '512x512',
+            sizes: '512x512 192x192 64x64 32x32 24x24 16x16',
             type: 'image/png',
           },
         ],
