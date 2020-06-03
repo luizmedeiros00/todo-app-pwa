@@ -1,7 +1,7 @@
 <template>
-  <div id="q-app">
-    <router-view />
-  </div>
+    <div id="q-app" class="fundo">
+        <router-view />
+    </div>
 </template>
 
 <script>
@@ -14,3 +14,11 @@ export default {
   },
 };
 </script>
+
+
+<style>
+.fundo {
+    background-color: #282a2f
+}
+</style>
+

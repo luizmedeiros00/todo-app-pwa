@@ -10,10 +10,11 @@
           <q-form>
             <input type="hidden" v-model="cliente.id" />
             <div class="q-gutter-md">
-              <q-input
+              
+               <q-input
                 outlined
-                v-model="cliente.nome"
-                label="Nome"
+                v-model="cliente.razao_social"
+                label="Razão Social"
               />
               <q-input
                v-mask="['###.###.###-##', '##.###.###/####-##']"
@@ -21,6 +22,30 @@
                 v-model="cliente.cpfcnpj"
                 label="CPF ou CNPJ"
               />
+                <q-select filled v-model="cliente.ramo" :options="segmentos" label="Segmento" />
+              <q-input
+                outlined
+                v-model="cliente.nome"
+                label="Contato"
+              />
+              <q-input
+                outlined
+                v-model="cliente.email"
+                label="Email"
+              />
+               <q-input
+                outlined
+                v-model="cliente.telefone"
+                label="Telefone"
+              />
+               <!-- <q-select
+                emit-value
+                map-options
+                filled
+                v-model="cliente.user_id"
+                :options="users"
+                label="Usuario"
+              /> -->
             </div>
           </q-form>
         </q-card-section>
@@ -54,7 +79,7 @@ import {
   QDialog, QForm,
 } from 'quasar';
 import { mask } from 'vue-the-mask';
-
+import UserService from '../../service/Usuario/UsuarioService';
 
 export default {
   name: 'ModalCadastroCliente',
@@ -66,6 +91,9 @@ export default {
   data() {
     return {
       cliente: {},
+       users: [],
+         segmentos: ['Comercio','Textil','Outros'],
+          UserService: new UserService(),
     };
   },
   methods: {
@@ -75,6 +103,15 @@ export default {
     fechar() {
       this.$emit('fechar');
     },
+  
+     async loadUsers() {
+      const data = await this.UserService.list();
+      this.users = data.data.map(item => ({ label: item.name, value: item.id }));
+    },
+},
+  mounted() {
+    this.loadUsers();
+ 
   },
   watch: {
     edit(newEdit) {

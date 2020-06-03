@@ -108,9 +108,9 @@ module.exports = function (ctx) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: 'R. Amaral',
-        short_name: 'R. Amaral',
-        description: 'Aplicativo para controle de tarefas',
+        name: 'Minha Loja',
+        short_name: 'Minha Loja',
+        description: 'Gestão de loja',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',

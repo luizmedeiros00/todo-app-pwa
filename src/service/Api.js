@@ -97,4 +97,25 @@ export default class API {
       throw ResponseService(error, 'list');
     }
   }
+
+
+  totalAgenda = async () => {
+    try {
+      const response = await http.get(`${this.api}/total`);
+      return response.data;
+    } catch (error) {
+      throw ResponseService(error, 'list');
+    }
+  }
+
+  ultimoRegistro = async () => {
+    try {
+      const response = await http.get(`${this.api}/ultimo`);
+      return response.data;
+    } catch (error) {
+      throw ResponseService(error, 'list');
+    }
+  }
+
+
 }

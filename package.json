@@ -1,11 +1,11 @@
 {
-  "name": "todo-app",
+  "name": "loja-app",
   "version": "0.0.1",
-  "description": "R.Amaral - Modulo tributario",
-  "productName": "R.Amaral",
+  "description": "MinhaLoja",
+  "productName": "Minha Loja",
   "cordovaId": "org.cordova.quasar.app",
   "capacitorId": "",
-  "author": "Luiz Medeiros <luizmedeiros00@gmail.com>",
+  "author": "Luiz Medeiros <salomao.leite@hotmail.com>",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue src",

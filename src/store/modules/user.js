@@ -2,7 +2,9 @@ import Vue from 'vue';
 import { http } from '../../service/Http';
 
 const getters = {
+  isCliente: state => state.user.email,
   isAdmin: state => state.user.tipo === 'Administrador',
+  isUser: state => state.user.tipo === 'Usuario',
   isCoordenador: state => state.user.tipo === 'Coordenador',
   nomeUser: state => state.user.name,
   isUserLoaded: state => !!state.user.name,

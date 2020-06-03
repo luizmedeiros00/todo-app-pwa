@@ -1,7 +1,7 @@
 <template>
   <q-layout>
     <q-page-container>
-      <q-page class="bg-white  row justify-center items-center">
+      <q-page class="dark  row justify-center items-center">
         <div class="q-pa-md row items-start q-gutter-md">
           <a href="http://ramaral.com">
             <img
@@ -15,20 +15,26 @@
             <q-card-section>
               <q-form class="q-gutter-md">
                 <q-input
+                dense
                   square
                   filled
                   clearable
                   v-model="user.email"
                   type="email"
                   label="email"
+                  size="md"
+                  color="black"
                 />
                 <q-input
                   square
-                  filled
+                  dense
+                  fillcd ed
                   clearable
                   v-model="user.password"
                   type="password"
                   label="password"
+                  size="md"
+                  color="black"
                 />
               </q-form>
             </q-card-section>
@@ -37,11 +43,16 @@
                 @click.prevent="login()"
                 unelevated
                 color="primary"
-                size="lg"
+                   size="md"
                 class="full-width"
                 label="Login"
               />
+               
             </q-card-actions>
+            
+             <div class="q-pa-md row items-start q-gutter-md">
+               <a href="registracliente">Fazer Cadastro</a>
+             </div>
           </q-card>
         </div>
       </q-page>

@@ -18,6 +18,8 @@ const routes = [
       { path: 'dashboard', component: () => import('pages/Dashboard/Dashboard.vue') },
       { path: 'cliente', component: () => import('pages/Cliente/ListaCliente.vue') },
       { path: 'atividade', component: () => import('pages/Atividade/ListaAtividade.vue') },
+      { path: 'agenda', component: () => import('pages/Agenda/ListaAgenda.vue') },
+      { path: 'agendamento', component: () => import('pages/Agendamento/ListaAgendamento.vue') },
       { path: 'detalhe', component: () => import('pages/Atividade/Detalhes.vue') },
       { path: 'usuario', component: () => import('pages/Usuario/ListaUsuario.vue') },
     ],
@@ -26,6 +28,10 @@ const routes = [
   {
     path: '/login',
     component: () => import('pages/Login/Login.vue'),
+  },
+  {
+    path: '/registracliente',
+    component: () => import('pages/Cliente/RegistraCliente.vue'),
   },
 ];
 

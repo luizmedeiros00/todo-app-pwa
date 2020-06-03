@@ -1,94 +1,73 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header
-      elevated
-      class="primary"
-    >
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          @click="leftDrawerOpen = !leftDrawerOpen"
-          icon="menu"
-          aria-label="Menu"
-        />
+    <q-layout view="lHh Lpr lFf">
+        <q-header elevated class="primary">
+            <q-toolbar>
+                <q-btn flat dense round @click="leftDrawerOpen = !leftDrawerOpen" icon="menu" aria-label="Menu" />
+    
+                <q-toolbar-title v-if="isAdmin || isCoordenador">Administração </q-toolbar-title>
+                <q-toolbar-title v-if="isUser">MinhaLoja </q-toolbar-title>
+    
+                <!-- <q-btn flat round dense icon="more_vert" /> -->
+                <span style="fontSize:14px;textAling:right">{{nomeUser}}</span>
+                <q-btn-dropdown flat round dense>
+                    <q-list>
+    
+                        <q-item clickable v-close-popup @click="logout">
+                            <q-item-section>
+                                <q-item-label>Sair</q-item-label>
+                            </q-item-section>
+                        </q-item>
+                    </q-list>
+                </q-btn-dropdown>
+            </q-toolbar>
+        </q-header>
+    
+        <q-drawer v-model="leftDrawerOpen" show-if-above bordered content-class="primary">
+             <div class="q-pa-md q-gutter-md">
+    <q-list bordered padding  style="max-width: 350px">
+      <q-item-label header>Cadastros</q-item-label>
 
-        <q-toolbar-title>Menu </q-toolbar-title>
+      <q-item clickable v-ripple>
+        <q-item-section avatar top>
+          <q-avatar icon="folder" color="teal" text-color="white" />
+        </q-item-section>
 
-        <!-- <q-btn flat round dense icon="more_vert" /> -->
-        <span style="fontSize:14px;textAling:right">{{nomeUser}}</span>
-        <q-btn-dropdown
-          flat round dense        >
-          <q-list>
+        <q-item-section>
+          <q-item-label lines="1">Produtos</q-item-label>
+          <q-item-label caption>Cadastrar um produto</q-item-label>
+        </q-item-section>
 
-            <q-item
-              clickable
-              v-close-popup
-              @click="logout"
-            >
-              <q-item-section>
-                <q-item-label>Sair</q-item-label>
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </q-btn-dropdown>
-      </q-toolbar>
-    </q-header>
+      </q-item>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-      content-class="primary"
-    >
-      <q-list>
-        <q-item-label header >Menu</q-item-label>
-        <q-item to="/">
-          <q-item-section avatar>
-            <q-icon name="poll" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Dashboard</q-item-label>
-            <q-item-label caption>Graficos</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item to="cliente">
-          <q-item-section avatar>
-            <q-icon name="people" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Clientes</q-item-label>
-            <q-item-label caption>Informações dos clientes</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item to="atividade">
-          <q-item-section avatar>
-            <q-icon name="event_note" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Atividades</q-item-label>
-            <q-item-label caption>Lista de atividades</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item  v-if="isAdmin" to="usuario">
-          <q-item-section avatar>
-            <q-icon name="account_box" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Usuarios</q-item-label>
-            <q-item-label caption>Usuarios do sistema {{isAdmin}}</q-item-label>
-          </q-item-section>
-        </q-item>
-      </q-list>
-    </q-drawer>
+      <q-item clickable v-ripple>
+        <q-item-section avatar top>
+          <q-avatar icon="folder" color="primary" text-color="white" />
+        </q-item-section>
 
-    <q-page-container>
-      <router-view />
-    </q-page-container>
-    <modal-dialog />
-  </q-layout>
+        <q-item-section>
+          <q-item-label lines="1">Categorias</q-item-label>
+          <q-item-label caption>Cadastrar uma categoria do produto</q-item-label>
+        </q-item-section>
+
+      </q-item>
+
+    
+
+
+      <q-separator spaced />
+     
+    </q-list>
+  </div>
+
+        </q-drawer>
+    
+        <q-page-container>
+            <router-view />
+        </q-page-container>
+        <modal-dialog />
+    </q-layout>
 </template>
+
 <script>
 import { QBtnDropdown } from 'quasar';
 import { mapGetters } from 'vuex';
@@ -97,28 +76,27 @@ import ModalDialog from '../components/modal/ModalDialog';
 
 export default {
 
-  name: 'MyLayout',
-  components: { QBtnDropdown, ModalDialog },
-  computed: { ...mapGetters('user', ['nomeUser', 'isAdmin']) },
-  data() {
-    return {
-      versao: process.env.APP_VERSAO,
-      UsuarioService: new UsuarioService(),
-      showModalSobre: false,
-      leftDrawerOpen: false,
-      usuario: null,
-    };
-  },
-  methods: {
-    logout() {
-      this.$store.dispatch('auth/AUTH_LOGOUT').then(() => {
-        this.$router.push('/login');
-      });
+    name: 'MyLayout',
+    components: { QBtnDropdown, ModalDialog },
+    computed: { ...mapGetters('user', ['nomeUser', 'isAdmin','isUser','isCoordenador']) },
+    data() {
+        return {
+            versao: process.env.APP_VERSAO,
+            UsuarioService: new UsuarioService(),
+            showModalSobre: false,
+            leftDrawerOpen: false,
+            
+            usuario: null,
+        };
     },
-    showModal() {
-      this.showModalSobre = true;
+    methods: {
+        logout() {
+            this.$store.dispatch('auth/AUTH_LOGOUT').then(() => {
+                this.$router.push('/login');
+            });
+        },
+       
     },
-  },
 
 
 };

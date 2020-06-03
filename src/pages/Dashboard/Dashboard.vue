@@ -71,7 +71,7 @@ export default {
   },
   created() {
     // this.atualiza();
-    this.loadAtividades();
+  //  this.loadAtividades();
   },
 
 
