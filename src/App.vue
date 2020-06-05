@@ -18,7 +18,9 @@ export default {
 
 <style>
 .fundo {
-    background-color: #282a2f
+     background-color:  #f5f5f5; /*#282a2f */
+   
+
 }
 </style>
 

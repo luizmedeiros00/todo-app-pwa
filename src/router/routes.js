@@ -16,6 +16,9 @@ const routes = [
     children: [
       { path: '/', component: () => import('pages/Home/Home.vue') },
       { path: 'dashboard', component: () => import('pages/Dashboard/Dashboard.vue') },
+      { path: 'categorias', component: () => import('pages/Categoria/ListaCategoria.vue') },
+      { path: 'subcategorias', component: () => import('pages/SubCategoria/ListaSubCategoria.vue') },
+   
       { path: 'cliente', component: () => import('pages/Cliente/ListaCliente.vue') },
       { path: 'atividade', component: () => import('pages/Atividade/ListaAtividade.vue') },
       { path: 'agenda', component: () => import('pages/Agenda/ListaAgenda.vue') },
