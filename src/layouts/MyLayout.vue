@@ -24,60 +24,91 @@
     
         <q-drawer v-model="leftDrawerOpen" show-if-above bordered content-class="primary">
         <div class="q-pa-md q-gutter-md">
-        <q-list bordered padding  style="max-width: 350px">
-          <q-item-label header>Acompanhamentos</q-item-label>
+          <q-list bordered padding  style="max-width: 350px">
+            <q-item-label header>Menu</q-item-label>
+              <q-item clickable v-ripple to="dashboard">
+                <q-item-section avatar top>
+                  <q-avatar icon="fas fa-chart-line" color="primary" text-color="white" size="md"/>
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label lines="1">Acompanhamentos</q-item-label>
+                  <q-item-label caption>Painel de acompanhamento</q-item-label>
+                </q-item-section>
+              </q-item>
+                <q-item clickable v-ripple to="clientes">
+                <q-item-section avatar top>
+                  <q-avatar icon="fas fa-user" color="primary" text-color="white" size="md"/>
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label lines="1">Clientes</q-item-label>
+                  <q-item-label caption>Inclusão de Clientes</q-item-label>
+                </q-item-section>
+              </q-item>
+     
+              <q-expansion-item to="produtos"
+              expand-separator icon="fas fa-box-open" 
+              label="Produtos" 
+              caption="Cadastro do produto" 
+             
+              header-class="text-primary"
+              > 
+                <q-item clickable v-ripple to="categorias">
+                  <q-item-section avatar top>
+                    <q-avatar icon="fas fa-folder" color="primary" text-color="white" size="xs" />
+                  </q-item-section>
+                  <q-item-section>
+                    <q-item-label lines="1">Categorias</q-item-label>
+                    <q-item-label caption>Inclusão de categorias</q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item clickable v-ripple to="subcategorias">
+                  <q-item-section avatar top>
+                    <q-avatar icon="fas fa-folder" color="primary" text-color="white"  size="xs" />
+                  </q-item-section>
+                  <q-item-section>
+                    <q-item-label lines="1">Subcategoria</q-item-label>
+                    <q-item-label caption>Inclusão de subcategoria </q-item-label>
+                  </q-item-section>
+                </q-item>
+             </q-expansion-item>
 
-        <q-item clickable v-ripple to="dashboard">
-          <q-item-section avatar top>
-            <q-avatar icon="folder" color="teal" text-color="white" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label lines="1">Dashboard</q-item-label>
-            <q-item-label caption>Acompanhamentos</q-item-label>
-          </q-item-section>
-        </q-item>
-
-    
-      <q-separator spaced />
-      
-        <q-item-label header>Cadastros</q-item-label>
-
-        <q-item clickable v-ripple to="produtos">
-          <q-item-section avatar top>
-            <q-avatar icon="folder" color="teal" text-color="white" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label lines="1">Produtos</q-item-label>
-            <q-item-label caption>Cadastrar um produto</q-item-label>
-          </q-item-section>
-        </q-item>
-
-      <q-item clickable v-ripple to="categorias">
-        <q-item-section avatar top>
-          <q-avatar icon="folder" color="primary" text-color="white" />
-        </q-item-section>
-
-        <q-item-section>
-          <q-item-label lines="1">Categorias</q-item-label>
-          <q-item-label caption>Cadastrar uma categoria do produto</q-item-label>
-        </q-item-section>
-
-      </q-item>
-
-       <q-item clickable v-ripple to="subcategorias">
-        <q-item-section avatar top>
-          <q-avatar icon="folder" color="primary" text-color="white" />
-        </q-item-section>
-
-        <q-item-section>
-          <q-item-label lines="1">SubCategoria</q-item-label>
-          <q-item-label caption>Cadastrar uma subcategoria do produto</q-item-label>
-        </q-item-section>
-
-      </q-item>
-      <q-separator spaced />
-    </q-list>
-  </div>
+            <q-expansion-item to="funcionarios"
+              expand-separator icon="fas fa-box-open" 
+              label="Funcionarios" 
+              caption="Cadastro do funcionario" 
+             
+              header-class="text-primary"
+              > 
+                <q-item clickable v-ripple to="cargos">
+                  <q-item-section avatar top>
+                    <q-avatar icon="fas fa-folder" color="primary" text-color="white" size="xs" />
+                  </q-item-section>
+                  <q-item-section>
+                    <q-item-label lines="1">Cargos</q-item-label>
+                    <q-item-label caption>Inclusão de cargos</q-item-label>
+                  </q-item-section>
+                </q-item>
+               
+             </q-expansion-item>
+              <q-expansion-item 
+              expand-separator icon="fas fa-retweet" 
+              label="Estoque" 
+              caption="Movimento Estoque" 
+              header-class="text-primary"
+              > 
+                <q-item clickable v-ripple to="estoque">
+                  <q-item-section avatar top>
+                    <q-avatar icon="fas fa-folder" color="primary" text-color="white" size="xs" />
+                  </q-item-section>
+                  <q-item-section>
+                    <q-item-label lines="1">Entrada/Saida</q-item-label>
+                    <q-item-label caption>Gerenciar entrada e saida de produtos</q-item-label>
+                  </q-item-section>
+                </q-item>
+               
+             </q-expansion-item>
+          </q-list>
+        </div>
 
         </q-drawer>
     

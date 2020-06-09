@@ -18,8 +18,13 @@ const routes = [
       { path: 'dashboard', component: () => import('pages/Dashboard/Dashboard.vue') },
       { path: 'categorias', component: () => import('pages/Categoria/ListaCategoria.vue') },
       { path: 'subcategorias', component: () => import('pages/SubCategoria/ListaSubCategoria.vue') },
+      { path: 'fornecedores', component: () => import('pages/Fornecedor/ListaFornecedor.vue') },
+      { path: 'produtos', component: () => import('pages/Produto/ListaProduto.vue') },
+      { path: 'clientes', component: () => import('pages/Cliente/ListaCliente.vue') },
+      { path: 'cargos', component: () => import('pages/Cargo/ListaCargo.vue') },
+      { path: 'funcionarios', component: () => import('pages/Funcionario/ListaFuncionario.vue') },
    
-      { path: 'cliente', component: () => import('pages/Cliente/ListaCliente.vue') },
+
       { path: 'atividade', component: () => import('pages/Atividade/ListaAtividade.vue') },
       { path: 'agenda', component: () => import('pages/Agenda/ListaAgenda.vue') },
       { path: 'agendamento', component: () => import('pages/Agendamento/ListaAgendamento.vue') },

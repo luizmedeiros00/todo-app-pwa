@@ -65,6 +65,16 @@ export default class API {
     }
   }
 
+  searchNoPaginate = async (params = {}) => {
+    const queryFilter = params ? `&${this.queryString.stringify(params)}` : '';
+      try {
+      const response = await http.get(`${this.api}${queryFilter}`);
+      return response.data;
+    } catch (error) {
+      throw ResponseService(error, 'get', 'item');
+    }
+  }
+
   // search = async (params = {}, page) => {
   //   const paginate = page ? page : 1
   //   const filter = this.urlToParam(params)
